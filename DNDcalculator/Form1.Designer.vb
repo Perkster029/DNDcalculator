@@ -23,18 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.chrNameCombo1 = New System.Windows.Forms.ComboBox()
-        Me.saveButton = New System.Windows.Forms.Button()
-        Me.loadButton = New System.Windows.Forms.Button()
-        Me.chrNameCheckedListBox1 = New System.Windows.Forms.CheckedListBox()
-        Me.actionCombo = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.clearLoadButton = New System.Windows.Forms.Button()
-        Me.clearInit = New System.Windows.Forms.Button()
-        Me.sortInit = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.initBox = New System.Windows.Forms.TextBox()
+        Me.orderNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrInit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrInitMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +38,26 @@ Partial Class Form1
         Me.chrWIS = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrCHA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrNameCombo1 = New System.Windows.Forms.ComboBox()
+        Me.saveButton = New System.Windows.Forms.Button()
+        Me.loadButton = New System.Windows.Forms.Button()
+        Me.chrNameCheckedListBox1 = New System.Windows.Forms.CheckedListBox()
+        Me.actionCombo = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.clearLoadButton = New System.Windows.Forms.Button()
+        Me.clearInit = New System.Windows.Forms.Button()
+        Me.sortInit = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.initBox = New System.Windows.Forms.TextBox()
+        Me.rollText = New System.Windows.Forms.TextBox()
+        Me.rollButton = New System.Windows.Forms.Button()
+        Me.rollHistory = New System.Windows.Forms.TextBox()
+        Me.crInitButton = New System.Windows.Forms.Button()
+        Me.importButton = New System.Windows.Forms.Button()
+        Me.selAllButton = New System.Windows.Forms.Button()
+        Me.desAllButton = New System.Windows.Forms.Button()
+        Me.resolveButton = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -57,117 +66,18 @@ Partial Class Form1
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.chrName, Me.chrInit, Me.chrInitMod, Me.currentHP, Me.maxHP, Me.chrAC, Me.dcSave, Me.chrSTR, Me.chrDEX, Me.chrCON, Me.chrINT, Me.chrWIS, Me.chrCHA, Me.status})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.orderNum, Me.chrName, Me.chrInit, Me.chrInitMod, Me.currentHP, Me.maxHP, Me.chrAC, Me.dcSave, Me.chrSTR, Me.chrDEX, Me.chrCON, Me.chrINT, Me.chrWIS, Me.chrCHA, Me.status})
         Me.DataGridView1.Location = New System.Drawing.Point(12, 279)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1004, 284)
+        Me.DataGridView1.Size = New System.Drawing.Size(1035, 284)
         Me.DataGridView1.TabIndex = 0
         '
-        'chrNameCombo1
+        'orderNum
         '
-        Me.chrNameCombo1.FormattingEnabled = True
-        Me.chrNameCombo1.Location = New System.Drawing.Point(66, 19)
-        Me.chrNameCombo1.Name = "chrNameCombo1"
-        Me.chrNameCombo1.Size = New System.Drawing.Size(121, 21)
-        Me.chrNameCombo1.TabIndex = 1
-        '
-        'saveButton
-        '
-        Me.saveButton.Location = New System.Drawing.Point(779, 250)
-        Me.saveButton.Name = "saveButton"
-        Me.saveButton.Size = New System.Drawing.Size(75, 23)
-        Me.saveButton.TabIndex = 2
-        Me.saveButton.Text = "Save"
-        Me.saveButton.UseVisualStyleBackColor = True
-        '
-        'loadButton
-        '
-        Me.loadButton.Location = New System.Drawing.Point(860, 250)
-        Me.loadButton.Name = "loadButton"
-        Me.loadButton.Size = New System.Drawing.Size(75, 23)
-        Me.loadButton.TabIndex = 3
-        Me.loadButton.Text = "Load"
-        Me.loadButton.UseVisualStyleBackColor = True
-        '
-        'chrNameCheckedListBox1
-        '
-        Me.chrNameCheckedListBox1.FormattingEnabled = True
-        Me.chrNameCheckedListBox1.Location = New System.Drawing.Point(320, 19)
-        Me.chrNameCheckedListBox1.Name = "chrNameCheckedListBox1"
-        Me.chrNameCheckedListBox1.Size = New System.Drawing.Size(143, 184)
-        Me.chrNameCheckedListBox1.TabIndex = 5
-        '
-        'actionCombo
-        '
-        Me.actionCombo.FormattingEnabled = True
-        Me.actionCombo.Location = New System.Drawing.Point(193, 19)
-        Me.actionCombo.Name = "actionCombo"
-        Me.actionCombo.Size = New System.Drawing.Size(121, 21)
-        Me.actionCombo.TabIndex = 4
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(469, 23)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(19, 13)
-        Me.Label1.TabIndex = 7
-        Me.Label1.Text = "for"
-        '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(494, 21)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(75, 20)
-        Me.NumericUpDown1.TabIndex = 8
-        '
-        'clearLoadButton
-        '
-        Me.clearLoadButton.Location = New System.Drawing.Point(941, 250)
-        Me.clearLoadButton.Name = "clearLoadButton"
-        Me.clearLoadButton.Size = New System.Drawing.Size(75, 23)
-        Me.clearLoadButton.TabIndex = 9
-        Me.clearLoadButton.Text = "Clear/Load"
-        Me.clearLoadButton.UseVisualStyleBackColor = True
-        '
-        'clearInit
-        '
-        Me.clearInit.Location = New System.Drawing.Point(62, 19)
-        Me.clearInit.Name = "clearInit"
-        Me.clearInit.Size = New System.Drawing.Size(48, 23)
-        Me.clearInit.TabIndex = 10
-        Me.clearInit.Text = "Clear"
-        Me.clearInit.UseVisualStyleBackColor = True
-        '
-        'sortInit
-        '
-        Me.sortInit.Location = New System.Drawing.Point(6, 19)
-        Me.sortInit.Name = "sortInit"
-        Me.sortInit.Size = New System.Drawing.Size(50, 23)
-        Me.sortInit.TabIndex = 11
-        Me.sortInit.Text = "Sort"
-        Me.sortInit.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.initBox)
-        Me.GroupBox1.Controls.Add(Me.clearInit)
-        Me.GroupBox1.Controls.Add(Me.sortInit)
-        Me.GroupBox1.Location = New System.Drawing.Point(53, 57)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(151, 206)
-        Me.GroupBox1.TabIndex = 12
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Initiative"
-        '
-        'initBox
-        '
-        Me.initBox.Location = New System.Drawing.Point(4, 49)
-        Me.initBox.Multiline = True
-        Me.initBox.Name = "initBox"
-        Me.initBox.ReadOnly = True
-        Me.initBox.Size = New System.Drawing.Size(141, 151)
-        Me.initBox.TabIndex = 12
+        Me.orderNum.HeaderText = "#"
+        Me.orderNum.Name = "orderNum"
+        Me.orderNum.ReadOnly = True
+        Me.orderNum.Width = 30
         '
         'chrName
         '
@@ -256,11 +166,199 @@ Partial Class Form1
         Me.status.HeaderText = "Status"
         Me.status.Name = "status"
         '
+        'chrNameCombo1
+        '
+        Me.chrNameCombo1.FormattingEnabled = True
+        Me.chrNameCombo1.Location = New System.Drawing.Point(788, 27)
+        Me.chrNameCombo1.Name = "chrNameCombo1"
+        Me.chrNameCombo1.Size = New System.Drawing.Size(121, 21)
+        Me.chrNameCombo1.TabIndex = 1
+        '
+        'saveButton
+        '
+        Me.saveButton.Location = New System.Drawing.Point(779, 250)
+        Me.saveButton.Name = "saveButton"
+        Me.saveButton.Size = New System.Drawing.Size(75, 23)
+        Me.saveButton.TabIndex = 2
+        Me.saveButton.Text = "Save"
+        Me.saveButton.UseVisualStyleBackColor = True
+        '
+        'loadButton
+        '
+        Me.loadButton.Location = New System.Drawing.Point(860, 250)
+        Me.loadButton.Name = "loadButton"
+        Me.loadButton.Size = New System.Drawing.Size(75, 23)
+        Me.loadButton.TabIndex = 3
+        Me.loadButton.Text = "Load"
+        Me.loadButton.UseVisualStyleBackColor = True
+        '
+        'chrNameCheckedListBox1
+        '
+        Me.chrNameCheckedListBox1.CheckOnClick = True
+        Me.chrNameCheckedListBox1.FormattingEnabled = True
+        Me.chrNameCheckedListBox1.Location = New System.Drawing.Point(210, 32)
+        Me.chrNameCheckedListBox1.Name = "chrNameCheckedListBox1"
+        Me.chrNameCheckedListBox1.Size = New System.Drawing.Size(143, 184)
+        Me.chrNameCheckedListBox1.TabIndex = 5
+        '
+        'actionCombo
+        '
+        Me.actionCombo.FormattingEnabled = True
+        Me.actionCombo.Location = New System.Drawing.Point(359, 32)
+        Me.actionCombo.Name = "actionCombo"
+        Me.actionCombo.Size = New System.Drawing.Size(121, 21)
+        Me.actionCombo.TabIndex = 4
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(483, 35)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(19, 13)
+        Me.Label1.TabIndex = 7
+        Me.Label1.Text = "for"
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(504, 33)
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(75, 20)
+        Me.NumericUpDown1.TabIndex = 8
+        '
+        'clearLoadButton
+        '
+        Me.clearLoadButton.Location = New System.Drawing.Point(941, 250)
+        Me.clearLoadButton.Name = "clearLoadButton"
+        Me.clearLoadButton.Size = New System.Drawing.Size(75, 23)
+        Me.clearLoadButton.TabIndex = 9
+        Me.clearLoadButton.Text = "Clear/Load"
+        Me.clearLoadButton.UseVisualStyleBackColor = True
+        '
+        'clearInit
+        '
+        Me.clearInit.Location = New System.Drawing.Point(62, 19)
+        Me.clearInit.Name = "clearInit"
+        Me.clearInit.Size = New System.Drawing.Size(48, 23)
+        Me.clearInit.TabIndex = 10
+        Me.clearInit.Text = "Clear"
+        Me.clearInit.UseVisualStyleBackColor = True
+        '
+        'sortInit
+        '
+        Me.sortInit.Location = New System.Drawing.Point(6, 19)
+        Me.sortInit.Name = "sortInit"
+        Me.sortInit.Size = New System.Drawing.Size(50, 23)
+        Me.sortInit.TabIndex = 11
+        Me.sortInit.Text = "Sort"
+        Me.sortInit.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.initBox)
+        Me.GroupBox1.Controls.Add(Me.clearInit)
+        Me.GroupBox1.Controls.Add(Me.sortInit)
+        Me.GroupBox1.Location = New System.Drawing.Point(39, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(151, 206)
+        Me.GroupBox1.TabIndex = 12
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Initiative"
+        '
+        'initBox
+        '
+        Me.initBox.Location = New System.Drawing.Point(4, 49)
+        Me.initBox.Multiline = True
+        Me.initBox.Name = "initBox"
+        Me.initBox.ReadOnly = True
+        Me.initBox.Size = New System.Drawing.Size(141, 151)
+        Me.initBox.TabIndex = 12
+        '
+        'rollText
+        '
+        Me.rollText.Location = New System.Drawing.Point(777, 68)
+        Me.rollText.Name = "rollText"
+        Me.rollText.Size = New System.Drawing.Size(70, 20)
+        Me.rollText.TabIndex = 13
+        '
+        'rollButton
+        '
+        Me.rollButton.Location = New System.Drawing.Point(853, 66)
+        Me.rollButton.Name = "rollButton"
+        Me.rollButton.Size = New System.Drawing.Size(75, 23)
+        Me.rollButton.TabIndex = 14
+        Me.rollButton.Text = "Roll"
+        Me.rollButton.UseVisualStyleBackColor = True
+        '
+        'rollHistory
+        '
+        Me.rollHistory.Location = New System.Drawing.Point(779, 95)
+        Me.rollHistory.Multiline = True
+        Me.rollHistory.Name = "rollHistory"
+        Me.rollHistory.ReadOnly = True
+        Me.rollHistory.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.rollHistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.rollHistory.Size = New System.Drawing.Size(149, 117)
+        Me.rollHistory.TabIndex = 15
+        Me.rollHistory.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'crInitButton
+        '
+        Me.crInitButton.Location = New System.Drawing.Point(210, 222)
+        Me.crInitButton.Name = "crInitButton"
+        Me.crInitButton.Size = New System.Drawing.Size(84, 23)
+        Me.crInitButton.TabIndex = 16
+        Me.crInitButton.Text = "C/R Initiative"
+        Me.crInitButton.UseVisualStyleBackColor = True
+        '
+        'importButton
+        '
+        Me.importButton.Location = New System.Drawing.Point(504, 59)
+        Me.importButton.Name = "importButton"
+        Me.importButton.Size = New System.Drawing.Size(75, 23)
+        Me.importButton.TabIndex = 17
+        Me.importButton.Text = "Import"
+        Me.importButton.UseVisualStyleBackColor = True
+        '
+        'selAllButton
+        '
+        Me.selAllButton.Location = New System.Drawing.Point(219, 6)
+        Me.selAllButton.Name = "selAllButton"
+        Me.selAllButton.Size = New System.Drawing.Size(50, 20)
+        Me.selAllButton.TabIndex = 13
+        Me.selAllButton.Text = "Sel All"
+        Me.selAllButton.UseVisualStyleBackColor = True
+        '
+        'desAllButton
+        '
+        Me.desAllButton.Location = New System.Drawing.Point(293, 6)
+        Me.desAllButton.Name = "desAllButton"
+        Me.desAllButton.Size = New System.Drawing.Size(50, 20)
+        Me.desAllButton.TabIndex = 18
+        Me.desAllButton.Text = "Des All"
+        Me.desAllButton.UseVisualStyleBackColor = True
+        '
+        'resolveButton
+        '
+        Me.resolveButton.Location = New System.Drawing.Point(602, 32)
+        Me.resolveButton.Name = "resolveButton"
+        Me.resolveButton.Size = New System.Drawing.Size(75, 23)
+        Me.resolveButton.TabIndex = 19
+        Me.resolveButton.Text = "Resolve"
+        Me.resolveButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1027, 575)
+        Me.ClientSize = New System.Drawing.Size(1058, 575)
+        Me.Controls.Add(Me.resolveButton)
+        Me.Controls.Add(Me.desAllButton)
+        Me.Controls.Add(Me.selAllButton)
+        Me.Controls.Add(Me.importButton)
+        Me.Controls.Add(Me.crInitButton)
+        Me.Controls.Add(Me.rollHistory)
+        Me.Controls.Add(Me.rollButton)
+        Me.Controls.Add(Me.rollText)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.clearLoadButton)
         Me.Controls.Add(Me.NumericUpDown1)
@@ -295,6 +393,12 @@ Partial Class Form1
     Friend WithEvents sortInit As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents initBox As TextBox
+    Friend WithEvents rollText As TextBox
+    Friend WithEvents rollButton As Button
+    Friend WithEvents rollHistory As TextBox
+    Friend WithEvents crInitButton As Button
+    Friend WithEvents importButton As Button
+    Friend WithEvents orderNum As DataGridViewTextBoxColumn
     Friend WithEvents chrName As DataGridViewTextBoxColumn
     Friend WithEvents chrInit As DataGridViewTextBoxColumn
     Friend WithEvents chrInitMod As DataGridViewTextBoxColumn
@@ -309,4 +413,7 @@ Partial Class Form1
     Friend WithEvents chrWIS As DataGridViewTextBoxColumn
     Friend WithEvents chrCHA As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents selAllButton As Button
+    Friend WithEvents desAllButton As Button
+    Friend WithEvents resolveButton As Button
 End Class
