@@ -270,7 +270,6 @@ Public Class Form1
     End Sub
 
     Private Sub SelAllButton_Click(sender As Object, e As EventArgs) Handles selAllButton.Click
-        Dim checked As Boolean = True   ' Set to True or False, as required.
         For i = 0 To chrNameCheckedListBox1.Items.Count - 1
             chrNameCheckedListBox1.SetItemChecked(i, True)
         Next
@@ -281,6 +280,31 @@ Public Class Form1
         For i = 0 To chrNameCheckedListBox1.Items.Count - 1
             chrNameCheckedListBox1.SetItemChecked(i, False)
         Next
+    End Sub
+
+    Private Sub ResolveButton_Click(sender As Object, e As EventArgs) Handles resolveButton.Click
+
+        Dim modifier As Integer = 1
+        If StrComp(actionCombo.Text, "heals", vbTextCompare) = 0 Then
+            modifier = -1
+        End If
+        For j = 0 To chrNameCheckedListBox1.Items.Count - 1
+            If chrNameCheckedListBox1.GetItemChecked(j) Then
+                For k = 0 To DataGridView1.RowCount - 2
+                    'MsgBox(chrNameCheckedListBox1.Items(j).ToString)
+                    If StrComp(DataGridView1.Rows(k).Cells(1).Value, chrNameCheckedListBox1.Items(j).ToString, vbTextCompare) = 0 Then
+                        DataGridView1.Rows(k).Cells(4).Value -= modifier * NumericUpDown1.Value
+                        If DataGridView1.Rows(k).Cells(4).Value > DataGridView1.Rows(k).Cells(5).Value Then
+                            DataGridView1.Rows(k).Cells(4).Value = DataGridView1.Rows(k).Cells(5).Value
+                        End If
+                        If DataGridView1.Rows(k).Cells(4).Value < 0 Then
+                            DataGridView1.Rows(k).Cells(4).Value = 0
+                        End If
+                    End If
+                Next
+            End If
+        Next
+        'next
     End Sub
 
     ' Private Sub ValueTextbox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
