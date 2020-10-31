@@ -2,8 +2,33 @@
 
 Public Class Form1
 
+    Private stopwatch As New Stopwatch
     ReadOnly ThisFilename As String = Application.StartupPath & "\MyData.tsv"
     Public pubRollVal As Integer
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        Dim elapsed As TimeSpan = Me.stopwatch.Elapsed
+        timeLabel.Text = String.Format("{0:00}:{1:00}", elapsed.Seconds, Strings.Left(elapsed.Milliseconds.ToString, 1))
+    End Sub
+
+    Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
+        Timer1.Start()
+        Me.stopwatch.Start()
+        startButton.Enabled = False
+    End Sub
+
+    Private Sub StopButton_Click(sender As Object, e As EventArgs) Handles stopButton.Click
+        Timer1.Stop()
+        Me.stopwatch.Stop()
+        startButton.Enabled = True
+    End Sub
+
+    Private Sub ResetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
+        Me.stopwatch.Reset()
+        timeLabel.Text = "0:0"
+        startButton.Enabled = True
+    End Sub
+
     Private Sub SaveGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
         ThisGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         ThisGrid.SelectAll()
@@ -114,7 +139,7 @@ Public Class Form1
         Dim listToSort As New List(Of Tuple(Of String, Double))
 
         For i = 0 To DataGridView1.RowCount - 2
-            If Not DataGridView1.Rows(i).Cells(2).Value = vbNull Then
+            If Not IsNothing(DataGridView1.Rows(i).Cells(2)) And StrComp(DataGridView1.Rows(i).Cells(2).Value.ToString, "", vbTextCompare) <> 0 Then
                 If Asc(DataGridView1.Rows(i).Cells(2).Value) >= 48 And Asc(DataGridView1.Rows(i).Cells(2).Value) <= 57 Then
                     If CDbl(DataGridView1.Rows(i).Cells(2).Value) > 0 Then
                         listToSort.Add(Tuple.Create(DataGridView1.Rows(i).Cells(1).Value.ToString, CDbl(DataGridView1.Rows(i).Cells(2).Value)))
@@ -306,6 +331,8 @@ Public Class Form1
         Next
         'next
     End Sub
+
+
 
     ' Private Sub ValueTextbox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
 

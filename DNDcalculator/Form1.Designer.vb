@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.orderNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -58,6 +59,11 @@ Partial Class Form1
         Me.selAllButton = New System.Windows.Forms.Button()
         Me.desAllButton = New System.Windows.Forms.Button()
         Me.resolveButton = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.timeLabel = New System.Windows.Forms.Label()
+        Me.startButton = New System.Windows.Forms.Button()
+        Me.stopButton = New System.Windows.Forms.Button()
+        Me.resetButton = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -346,11 +352,55 @@ Partial Class Form1
         Me.resolveButton.Text = "Resolve"
         Me.resolveButton.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        '
+        'timeLabel
+        '
+        Me.timeLabel.AutoSize = True
+        Me.timeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.timeLabel.Location = New System.Drawing.Point(457, 143)
+        Me.timeLabel.Name = "timeLabel"
+        Me.timeLabel.Size = New System.Drawing.Size(122, 73)
+        Me.timeLabel.TabIndex = 20
+        Me.timeLabel.Text = "0:0"
+        '
+        'startButton
+        '
+        Me.startButton.Location = New System.Drawing.Point(431, 214)
+        Me.startButton.Name = "startButton"
+        Me.startButton.Size = New System.Drawing.Size(52, 23)
+        Me.startButton.TabIndex = 21
+        Me.startButton.Text = "Start"
+        Me.startButton.UseVisualStyleBackColor = True
+        '
+        'stopButton
+        '
+        Me.stopButton.Location = New System.Drawing.Point(489, 214)
+        Me.stopButton.Name = "stopButton"
+        Me.stopButton.Size = New System.Drawing.Size(52, 23)
+        Me.stopButton.TabIndex = 22
+        Me.stopButton.Text = "Stop"
+        Me.stopButton.UseVisualStyleBackColor = True
+        '
+        'resetButton
+        '
+        Me.resetButton.Location = New System.Drawing.Point(547, 214)
+        Me.resetButton.Name = "resetButton"
+        Me.resetButton.Size = New System.Drawing.Size(52, 23)
+        Me.resetButton.TabIndex = 23
+        Me.resetButton.Text = "Reset"
+        Me.resetButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1058, 575)
+        Me.Controls.Add(Me.resetButton)
+        Me.Controls.Add(Me.stopButton)
+        Me.Controls.Add(Me.startButton)
+        Me.Controls.Add(Me.timeLabel)
         Me.Controls.Add(Me.resolveButton)
         Me.Controls.Add(Me.desAllButton)
         Me.Controls.Add(Me.selAllButton)
@@ -416,4 +466,9 @@ Partial Class Form1
     Friend WithEvents selAllButton As Button
     Friend WithEvents desAllButton As Button
     Friend WithEvents resolveButton As Button
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents timeLabel As Label
+    Friend WithEvents startButton As Button
+    Friend WithEvents stopButton As Button
+    Friend WithEvents resetButton As Button
 End Class
