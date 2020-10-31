@@ -64,6 +64,7 @@ Partial Class Form1
         Me.startButton = New System.Windows.Forms.Button()
         Me.stopButton = New System.Windows.Forms.Button()
         Me.resetButton = New System.Windows.Forms.Button()
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -359,11 +360,11 @@ Partial Class Form1
         '
         Me.timeLabel.AutoSize = True
         Me.timeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timeLabel.Location = New System.Drawing.Point(457, 143)
+        Me.timeLabel.Location = New System.Drawing.Point(436, 143)
         Me.timeLabel.Name = "timeLabel"
-        Me.timeLabel.Size = New System.Drawing.Size(122, 73)
+        Me.timeLabel.Size = New System.Drawing.Size(158, 73)
         Me.timeLabel.TabIndex = 20
-        Me.timeLabel.Text = "0:0"
+        Me.timeLabel.Text = "00:0"
         '
         'startButton
         '
@@ -391,6 +392,10 @@ Partial Class Form1
         Me.resetButton.TabIndex = 23
         Me.resetButton.Text = "Reset"
         Me.resetButton.UseVisualStyleBackColor = True
+        '
+        'Timer2
+        '
+        Me.Timer2.Interval = 60000
         '
         'Form1
         '
@@ -471,4 +476,5 @@ Partial Class Form1
     Friend WithEvents startButton As Button
     Friend WithEvents stopButton As Button
     Friend WithEvents resetButton As Button
+    Friend WithEvents Timer2 As Timer
 End Class

@@ -3,12 +3,16 @@
 Public Class Form1
 
     Private stopwatch As New Stopwatch
-    ReadOnly ThisFilename As String = Application.StartupPath & "\MyData.tsv"
+    Public ThisFilename As String = Application.StartupPath & "\MyData.tsv"
     Public pubRollVal As Integer
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         Dim elapsed As TimeSpan = Me.stopwatch.Elapsed
         timeLabel.Text = String.Format("{0:00}:{1:00}", elapsed.Seconds, Strings.Left(elapsed.Milliseconds.ToString, 1))
+    End Sub
+
+    Private Sub Timer2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer2.Tick
+        SaveGridData(DataGridView1, Application.StartupPath & "\MyData" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".tsv")
     End Sub
 
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
@@ -25,7 +29,7 @@ Public Class Form1
 
     Private Sub ResetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
         Me.stopwatch.Reset()
-        timeLabel.Text = "0:0"
+        timeLabel.Text = "00:0"
         startButton.Enabled = True
     End Sub
 
@@ -81,17 +85,53 @@ Public Class Form1
     End Sub
 
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
-        SaveGridData(DataGridView1, ThisFilename)
+        Dim fd As SaveFileDialog = New SaveFileDialog With {
+            .Title = "Save File Dialog",
+            .InitialDirectory = ThisFilename,
+            .Filter = "Tab Separated Values (*.tsv)|*.tsv",
+            .FilterIndex = 2,
+            .RestoreDirectory = True
+        }
+
+        If fd.ShowDialog() = DialogResult.OK Then
+            ThisFilename = fd.FileName
+            LoadGridData(DataGridView1, ThisFilename)
+            UpdateChar()
+        End If
     End Sub
 
     Private Sub LoadButton_Click(sender As Object, e As EventArgs) Handles loadButton.Click
-        LoadGridData(DataGridView1, ThisFilename)
-        UpdateChar()
+        Dim fd As OpenFileDialog = New OpenFileDialog With {
+            .Title = "Open File Dialog",
+            .InitialDirectory = ThisFilename,
+            .Filter = "Tab Separated Values (*.tsv)|*.tsv",
+            .FilterIndex = 2,
+            .RestoreDirectory = True
+        }
+
+        If fd.ShowDialog() = DialogResult.OK Then
+            ThisFilename = fd.FileName
+            LoadGridData(DataGridView1, ThisFilename)
+            UpdateChar()
+        End If
+
     End Sub
 
     Private Sub ClearLoadButton_Click(sender As Object, e As EventArgs) Handles clearLoadButton.Click
         ClearLoadGridData(DataGridView1, ThisFilename)
-        UpdateChar()
+        Dim fd As OpenFileDialog = New OpenFileDialog With {
+            .Title = "Open File Dialog",
+            .InitialDirectory = ThisFilename,
+            .Filter = "Tab Separated Values (*.tsv)|*.tsv",
+            .FilterIndex = 2,
+            .RestoreDirectory = True
+        }
+
+        If fd.ShowDialog() = DialogResult.OK Then
+            ThisFilename = fd.FileName
+            LoadGridData(DataGridView1, ThisFilename)
+            UpdateChar()
+        End If
     End Sub
 
     Sub UpdateChar()
@@ -124,7 +164,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Timer2.Start()
         actionCombo.Items.AddRange({"is damaged", "heals"})
         'actionCombo.SelectedIndex = actionCombo.FindStringExact("Damages")
         actionCombo.SelectedIndex = 0
