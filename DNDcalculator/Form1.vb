@@ -372,6 +372,10 @@ Public Class Form1
         'next
     End Sub
 
+    Private Sub ResistButton_Click(sender As Object, e As EventArgs) Handles resistButton.Click
+        NumericUpDown1.Value = Math.Floor(NumericUpDown1.Value / 2)
+    End Sub
+
 
 
     ' Private Sub ValueTextbox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)

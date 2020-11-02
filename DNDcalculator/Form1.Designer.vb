@@ -65,6 +65,7 @@ Partial Class Form1
         Me.stopButton = New System.Windows.Forms.Button()
         Me.resetButton = New System.Windows.Forms.Button()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.resistButton = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -72,11 +73,14 @@ Partial Class Form1
         '
         'DataGridView1
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.AllowUserToResizeColumns = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.orderNum, Me.chrName, Me.chrInit, Me.chrInitMod, Me.currentHP, Me.maxHP, Me.chrAC, Me.dcSave, Me.chrSTR, Me.chrDEX, Me.chrCON, Me.chrINT, Me.chrWIS, Me.chrCHA, Me.status})
         Me.DataGridView1.Location = New System.Drawing.Point(12, 279)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1035, 284)
+        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridView1.Size = New System.Drawing.Size(1059, 284)
         Me.DataGridView1.TabIndex = 0
         '
         'orderNum
@@ -397,11 +401,21 @@ Partial Class Form1
         '
         Me.Timer2.Interval = 60000
         '
+        'resistButton
+        '
+        Me.resistButton.Location = New System.Drawing.Point(504, 88)
+        Me.resistButton.Name = "resistButton"
+        Me.resistButton.Size = New System.Drawing.Size(75, 23)
+        Me.resistButton.TabIndex = 24
+        Me.resistButton.Text = "Resistant"
+        Me.resistButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1058, 575)
+        Me.ClientSize = New System.Drawing.Size(1083, 575)
+        Me.Controls.Add(Me.resistButton)
         Me.Controls.Add(Me.resetButton)
         Me.Controls.Add(Me.stopButton)
         Me.Controls.Add(Me.startButton)
@@ -477,4 +491,5 @@ Partial Class Form1
     Friend WithEvents stopButton As Button
     Friend WithEvents resetButton As Button
     Friend WithEvents Timer2 As Timer
+    Friend WithEvents resistButton As Button
 End Class
