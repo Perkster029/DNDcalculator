@@ -22,7 +22,7 @@ Public Class Form1
     End Sub
 
     Private Sub Timer2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer2.Tick
-        SaveGridData(DataGridView1, Application.StartupPath & "\MyData" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".tsv")
+        SaveGridData(DataGridView1, Application.StartupPath & "\MyDataAutosave" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".csv")
     End Sub
 
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
@@ -44,7 +44,7 @@ Public Class Form1
     End Sub
 
     Private Sub SaveGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
-        ThisGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        ThisGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         ThisGrid.SelectAll()
         IO.File.WriteAllText(Filename, ThisGrid.GetClipboardContent().GetText.TrimEnd)
         ThisGrid.ClearSelection()
@@ -57,21 +57,26 @@ Public Class Form1
         Dim headerLine As Boolean = True
 
         'ThisGrid.Rows.Clear()
-        For Each THisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(Environment.NewLine)
+        For Each THisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(vbLf) 'Split(Environment.NewLine)
             If headerLine Then
                 headerLine = False
                 Continue For
             End If
+
+            If StrComp(THisLine, "", vbTextCompare) = 0 Then
+                Continue For
+            End If
+
             boolFlag = True
             For i = 0 To DataGridView1.RowCount - 2
                 tempName1 = DataGridView1.Rows(i).Cells(1).Value
                 'MsgBox(tempName1)
-                tempName2 = Strings.Left(THisLine, THisLine.IndexOf(vbTab, THisLine.IndexOf(vbTab) + 1))
+                tempName2 = Strings.Left(THisLine, THisLine.IndexOf(",", THisLine.IndexOf(",") + 1))
                 'MsgBox(tempName2)
                 If Strings.Left(tempName2, 2).ToString.Trim.Length = 2 Then
-                    tempName2 = Mid(tempName2, 4)
-                Else
                     tempName2 = Mid(tempName2, 3)
+                Else
+                    tempName2 = Mid(tempName2, 2)
                 End If
 
                 's.IndexOf(',', s.IndexOf(',') + 1);
@@ -84,7 +89,7 @@ Public Class Form1
             Next i
 
             If boolFlag Then
-                ThisGrid.Rows.Add(Split(THisLine, vbTab))
+                ThisGrid.Rows.Add(Split(THisLine, ","))
             End If
         Next
 
@@ -100,15 +105,14 @@ Public Class Form1
         Dim fd As SaveFileDialog = New SaveFileDialog With {
             .Title = "Save File Dialog",
             .InitialDirectory = ThisFilename,
-            .Filter = "Tab Separated Values (*.tsv)|*.tsv",
+            .Filter = "Comma Separated Values (*.csv)|*.csv",
             .FilterIndex = 2,
             .RestoreDirectory = True
         }
 
         If fd.ShowDialog() = DialogResult.OK Then
             ThisFilename = fd.FileName
-            LoadGridData(DataGridView1, ThisFilename)
-            UpdateChar()
+            SaveGridData(DataGridView1, ThisFilename)
         End If
     End Sub
 
@@ -116,7 +120,7 @@ Public Class Form1
         Dim fd As OpenFileDialog = New OpenFileDialog With {
             .Title = "Open File Dialog",
             .InitialDirectory = ThisFilename,
-            .Filter = "Tab Separated Values (*.tsv)|*.tsv",
+            .Filter = "Comma Separated Values (*.csv)|*.csv",
             .FilterIndex = 2,
             .RestoreDirectory = True
         }
@@ -134,7 +138,7 @@ Public Class Form1
         Dim fd As OpenFileDialog = New OpenFileDialog With {
             .Title = "Open File Dialog",
             .InitialDirectory = ThisFilename,
-            .Filter = "Tab Separated Values (*.tsv)|*.tsv",
+            .Filter = "Comma Separated Values (*.csv)|*.csv",
             .FilterIndex = 2,
             .RestoreDirectory = True
         }
@@ -177,8 +181,7 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer2.Start()
-        actionCombo.Items.AddRange({"is damaged", "heals"})
-        'actionCombo.SelectedIndex = actionCombo.FindStringExact("Damages")
+        actionCombo.Items.AddRange({"is damaged", "is healed"})
         actionCombo.SelectedIndex = 0
 
         audioControl.TabPages(0).Text = "In Town"
@@ -489,6 +492,7 @@ Public Class Form1
     Private Sub StopAudioButton_Click(sender As Object, e As EventArgs) Handles stopAudioButton.Click
         StopAudio()
     End Sub
+
 
 
 
