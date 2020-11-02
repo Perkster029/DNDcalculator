@@ -4,7 +4,7 @@ Imports WMPLib 'Media Player in virtual form
 Public Class Form1
 
     Private stopwatch As New Stopwatch
-    Public ThisFilename As String = Application.StartupPath & "\MyData.tsv"
+    Public ThisFilename As String = Application.StartupPath
     Public pubRollVal As Integer
 
     Public inTownPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\In_Town\"
@@ -54,9 +54,14 @@ Public Class Form1
         Dim tempName1 As String
         Dim tempName2 As String
         Dim boolFlag As Boolean
+        Dim headerLine As Boolean = True
 
         'ThisGrid.Rows.Clear()
         For Each THisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(Environment.NewLine)
+            If headerLine Then
+                headerLine = False
+                Continue For
+            End If
             boolFlag = True
             For i = 0 To DataGridView1.RowCount - 2
                 tempName1 = DataGridView1.Rows(i).Cells(1).Value
@@ -87,10 +92,7 @@ Public Class Form1
     Private Sub ClearLoadGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
 
         ThisGrid.Rows.Clear()
-        For Each THisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(Environment.NewLine)
-            ThisGrid.Rows.Add(Split(THisLine, vbTab))
-        Next
-        UpdateChar()
+        LoadGridData(ThisGrid, Filename)
 
     End Sub
 
@@ -128,7 +130,7 @@ Public Class Form1
     End Sub
 
     Private Sub ClearLoadButton_Click(sender As Object, e As EventArgs) Handles clearLoadButton.Click
-        ClearLoadGridData(DataGridView1, ThisFilename)
+
         Dim fd As OpenFileDialog = New OpenFileDialog With {
             .Title = "Open File Dialog",
             .InitialDirectory = ThisFilename,
@@ -425,16 +427,62 @@ Public Class Form1
         For i = 0 To (inTownAudio.Items.Count - 1)
             inTownAudio.SetItemChecked(i, False)
         Next
+        For i = 0 To (onRoadAudio.Items.Count - 1)
+            onRoadAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (dungeonAudio.Items.Count - 1)
+            dungeonAudio.SetItemChecked(i, False)
+        Next
         'MsgBox(sender.SelectedItem.ToString)
         'MsgBox(inTownAudio.FindStringExact(sender.ToString))
         inTownAudio.SetItemChecked(inTownAudio.FindStringExact(sender.SelectedItem.ToString), True)
         Audio(inTownPath & sender.SelectedItem.ToString)
     End Sub
 
+    Private Sub OnRoadAudio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles onRoadAudio.SelectedIndexChanged
+        StopAudio()
+        For i = 0 To (inTownAudio.Items.Count - 1)
+            inTownAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (onRoadAudio.Items.Count - 1)
+            onRoadAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (dungeonAudio.Items.Count - 1)
+            dungeonAudio.SetItemChecked(i, False)
+        Next
+        'MsgBox(sender.SelectedItem.ToString)
+        'MsgBox(inTownAudio.FindStringExact(sender.ToString))
+        onRoadAudio.SetItemChecked(onRoadAudio.FindStringExact(sender.SelectedItem.ToString), True)
+        Audio(onRoadPath & sender.SelectedItem.ToString)
+    End Sub
+
+    Private Sub DungeonAudio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles dungeonAudio.SelectedIndexChanged
+        StopAudio()
+        For i = 0 To (inTownAudio.Items.Count - 1)
+            inTownAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (onRoadAudio.Items.Count - 1)
+            onRoadAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (dungeonAudio.Items.Count - 1)
+            dungeonAudio.SetItemChecked(i, False)
+        Next
+        'MsgBox(sender.SelectedItem.ToString)
+        'MsgBox(inTownAudio.FindStringExact(sender.ToString))
+        dungeonAudio.SetItemChecked(dungeonAudio.FindStringExact(sender.SelectedItem.ToString), True)
+        Audio(dungeonPath & sender.SelectedItem.ToString)
+    End Sub
+
     Private Sub StopAudio()
         Player.close()
         For i = 0 To (inTownAudio.Items.Count - 1)
             inTownAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (onRoadAudio.Items.Count - 1)
+            onRoadAudio.SetItemChecked(i, False)
+        Next
+        For i = 0 To (dungeonAudio.Items.Count - 1)
+            dungeonAudio.SetItemChecked(i, False)
         Next
     End Sub
 

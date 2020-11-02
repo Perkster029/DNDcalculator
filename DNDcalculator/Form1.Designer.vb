@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.orderNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -196,7 +197,7 @@ Partial Class Form1
         'chrNameCombo1
         '
         Me.chrNameCombo1.FormattingEnabled = True
-        Me.chrNameCombo1.Location = New System.Drawing.Point(45, 250)
+        Me.chrNameCombo1.Location = New System.Drawing.Point(30, 250)
         Me.chrNameCombo1.Name = "chrNameCombo1"
         Me.chrNameCombo1.Size = New System.Drawing.Size(121, 21)
         Me.chrNameCombo1.TabIndex = 1
@@ -223,7 +224,7 @@ Partial Class Form1
         '
         Me.chrNameCheckedListBox1.CheckOnClick = True
         Me.chrNameCheckedListBox1.FormattingEnabled = True
-        Me.chrNameCheckedListBox1.Location = New System.Drawing.Point(210, 32)
+        Me.chrNameCheckedListBox1.Location = New System.Drawing.Point(195, 32)
         Me.chrNameCheckedListBox1.Name = "chrNameCheckedListBox1"
         Me.chrNameCheckedListBox1.Size = New System.Drawing.Size(143, 184)
         Me.chrNameCheckedListBox1.TabIndex = 5
@@ -231,7 +232,7 @@ Partial Class Form1
         'actionCombo
         '
         Me.actionCombo.FormattingEnabled = True
-        Me.actionCombo.Location = New System.Drawing.Point(359, 32)
+        Me.actionCombo.Location = New System.Drawing.Point(344, 32)
         Me.actionCombo.Name = "actionCombo"
         Me.actionCombo.Size = New System.Drawing.Size(93, 21)
         Me.actionCombo.TabIndex = 4
@@ -239,7 +240,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(456, 35)
+        Me.Label1.Location = New System.Drawing.Point(441, 35)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(19, 13)
         Me.Label1.TabIndex = 7
@@ -247,7 +248,7 @@ Partial Class Form1
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(477, 32)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(462, 32)
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(75, 20)
         Me.NumericUpDown1.TabIndex = 8
@@ -284,7 +285,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.initBox)
         Me.GroupBox1.Controls.Add(Me.clearInit)
         Me.GroupBox1.Controls.Add(Me.sortInit)
-        Me.GroupBox1.Location = New System.Drawing.Point(39, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(24, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(151, 206)
         Me.GroupBox1.TabIndex = 12
@@ -330,7 +331,7 @@ Partial Class Form1
         '
         'crInitButton
         '
-        Me.crInitButton.Location = New System.Drawing.Point(210, 222)
+        Me.crInitButton.Location = New System.Drawing.Point(195, 222)
         Me.crInitButton.Name = "crInitButton"
         Me.crInitButton.Size = New System.Drawing.Size(84, 23)
         Me.crInitButton.TabIndex = 16
@@ -339,7 +340,7 @@ Partial Class Form1
         '
         'importButton
         '
-        Me.importButton.Location = New System.Drawing.Point(489, 59)
+        Me.importButton.Location = New System.Drawing.Point(474, 59)
         Me.importButton.Name = "importButton"
         Me.importButton.Size = New System.Drawing.Size(48, 23)
         Me.importButton.TabIndex = 17
@@ -348,7 +349,7 @@ Partial Class Form1
         '
         'selAllButton
         '
-        Me.selAllButton.Location = New System.Drawing.Point(219, 6)
+        Me.selAllButton.Location = New System.Drawing.Point(204, 6)
         Me.selAllButton.Name = "selAllButton"
         Me.selAllButton.Size = New System.Drawing.Size(50, 20)
         Me.selAllButton.TabIndex = 13
@@ -357,7 +358,7 @@ Partial Class Form1
         '
         'desAllButton
         '
-        Me.desAllButton.Location = New System.Drawing.Point(293, 6)
+        Me.desAllButton.Location = New System.Drawing.Point(278, 6)
         Me.desAllButton.Name = "desAllButton"
         Me.desAllButton.Size = New System.Drawing.Size(50, 20)
         Me.desAllButton.TabIndex = 18
@@ -366,7 +367,7 @@ Partial Class Form1
         '
         'resolveButton
         '
-        Me.resolveButton.Location = New System.Drawing.Point(562, 31)
+        Me.resolveButton.Location = New System.Drawing.Point(547, 31)
         Me.resolveButton.Name = "resolveButton"
         Me.resolveButton.Size = New System.Drawing.Size(75, 23)
         Me.resolveButton.TabIndex = 19
@@ -419,7 +420,7 @@ Partial Class Form1
         '
         'resistButton
         '
-        Me.resistButton.Location = New System.Drawing.Point(489, 87)
+        Me.resistButton.Location = New System.Drawing.Point(474, 87)
         Me.resistButton.Name = "resistButton"
         Me.resistButton.Size = New System.Drawing.Size(48, 23)
         Me.resistButton.TabIndex = 24
@@ -432,7 +433,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.stopButton)
         Me.GroupBox2.Controls.Add(Me.startButton)
         Me.GroupBox2.Controls.Add(Me.timeLabel)
-        Me.GroupBox2.Location = New System.Drawing.Point(360, 129)
+        Me.GroupBox2.Location = New System.Drawing.Point(345, 129)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(193, 116)
         Me.GroupBox2.TabIndex = 25
@@ -444,7 +445,7 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.rollHistory)
         Me.GroupBox3.Controls.Add(Me.rollButton)
         Me.GroupBox3.Controls.Add(Me.rollText)
-        Me.GroupBox3.Location = New System.Drawing.Point(561, 67)
+        Me.GroupBox3.Location = New System.Drawing.Point(546, 67)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(173, 178)
         Me.GroupBox3.TabIndex = 26
@@ -456,7 +457,7 @@ Partial Class Form1
         Me.audioControl.Controls.Add(Me.TabPage1)
         Me.audioControl.Controls.Add(Me.TabPage2)
         Me.audioControl.Controls.Add(Me.TabPage3)
-        Me.audioControl.Location = New System.Drawing.Point(740, 27)
+        Me.audioControl.Location = New System.Drawing.Point(727, 28)
         Me.audioControl.Name = "audioControl"
         Me.audioControl.SelectedIndex = 0
         Me.audioControl.Size = New System.Drawing.Size(336, 217)
@@ -524,7 +525,7 @@ Partial Class Form1
         '
         'stopAudioButton
         '
-        Me.stopAudioButton.Location = New System.Drawing.Point(998, 19)
+        Me.stopAudioButton.Location = New System.Drawing.Point(983, 19)
         Me.stopAudioButton.Name = "stopAudioButton"
         Me.stopAudioButton.Size = New System.Drawing.Size(75, 23)
         Me.stopAudioButton.TabIndex = 31
@@ -556,8 +557,9 @@ Partial Class Form1
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.chrNameCombo1)
         Me.Controls.Add(Me.DataGridView1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "GM Tool for D&D"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
