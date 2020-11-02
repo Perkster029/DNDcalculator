@@ -119,5 +119,50 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Audio\Dungeon\172_Castle_Jail.mp3" />
+    <Content Include="Audio\Dungeon\209_Rat_Battle.mp3" />
+    <Content Include="Audio\Dungeon\37_Catacombs.mp3" />
+    <Content Include="Audio\Dungeon\49_Goblins_Cave.mp3" />
+    <Content Include="Audio\Dungeon\65_Dungeon_I.mp3" />
+    <Content Include="Audio\Dungeon\71_Sleeping_Dragon.mp3" />
+    <Content Include="Audio\Dungeon\90_Dungeon_II_Mechanical.mp3" />
+    <Content Include="Audio\Dungeon\98_Lost_Mine.mp3" />
+    <Content Include="Audio\Dungeon\99_Cavern_of_Lost_Souls.mp3" />
+    <Content Include="Audio\In_Town\104_River_Town.mp3" />
+    <Content Include="Audio\In_Town\182_Country_Village.mp3" />
+    <Content Include="Audio\In_Town\208_Ghost_Town.mp3" />
+    <Content Include="Audio\In_Town\214_Castle_Kitchen.mp3" />
+    <Content Include="Audio\In_Town\229_Interrogation_Room.mp3" />
+    <Content Include="Audio\In_Town\54_Mountain_Tavern.mp3" />
+    <Content Include="Audio\In_Town\56_Medieval_Town.mp3" />
+    <Content Include="Audio\In_Town\66_Royal_Salon.mp3" />
+    <Content Include="Audio\In_Town\73_Medieval_Library.mp3" />
+    <Content Include="Audio\In_Town\75_Docks_District.mp3" />
+    <Content Include="Audio\In_Town\80_Blacksmith_Shoppe.mp3" />
+    <Content Include="Audio\On_Road\130_Russian_Winter.mp3" />
+    <Content Include="Audio\On_Road\131_The_Bog_Standard.mp3" />
+    <Content Include="Audio\On_Road\141_Hermit_Hut.mp3" />
+    <Content Include="Audio\On_Road\153_Secret_Garden.mp3" />
+    <Content Include="Audio\On_Road\161_Forest_Day.mp3" />
+    <Content Include="Audio\On_Road\166_Quiet_Cove.mp3" />
+    <Content Include="Audio\On_Road\223_Salt_Marsh.mp3" />
+    <Content Include="Audio\On_Road\228_Mushroom_Forest.mp3" />
+    <Content Include="Audio\On_Road\31_Frozen_Wastes.mp3" />
+    <Content Include="Audio\On_Road\48_Overland_with_Oxen.mp3" />
+    <Content Include="Audio\On_Road\51_Woodland_Campsite.mp3" />
+    <Content Include="Audio\On_Road\64_Mountain_Pass.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

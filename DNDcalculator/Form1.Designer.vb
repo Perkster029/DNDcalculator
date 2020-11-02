@@ -66,9 +66,25 @@ Partial Class Form1
         Me.resetButton = New System.Windows.Forms.Button()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.resistButton = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.audioControl = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.inTownAudio = New System.Windows.Forms.CheckedListBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.onRoadAudio = New System.Windows.Forms.CheckedListBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.dungeonAudio = New System.Windows.Forms.CheckedListBox()
+        Me.stopAudioButton = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.audioControl.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -180,14 +196,14 @@ Partial Class Form1
         'chrNameCombo1
         '
         Me.chrNameCombo1.FormattingEnabled = True
-        Me.chrNameCombo1.Location = New System.Drawing.Point(788, 27)
+        Me.chrNameCombo1.Location = New System.Drawing.Point(45, 250)
         Me.chrNameCombo1.Name = "chrNameCombo1"
         Me.chrNameCombo1.Size = New System.Drawing.Size(121, 21)
         Me.chrNameCombo1.TabIndex = 1
         '
         'saveButton
         '
-        Me.saveButton.Location = New System.Drawing.Point(779, 250)
+        Me.saveButton.Location = New System.Drawing.Point(833, 250)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(75, 23)
         Me.saveButton.TabIndex = 2
@@ -196,7 +212,7 @@ Partial Class Form1
         '
         'loadButton
         '
-        Me.loadButton.Location = New System.Drawing.Point(860, 250)
+        Me.loadButton.Location = New System.Drawing.Point(914, 250)
         Me.loadButton.Name = "loadButton"
         Me.loadButton.Size = New System.Drawing.Size(75, 23)
         Me.loadButton.TabIndex = 3
@@ -217,13 +233,13 @@ Partial Class Form1
         Me.actionCombo.FormattingEnabled = True
         Me.actionCombo.Location = New System.Drawing.Point(359, 32)
         Me.actionCombo.Name = "actionCombo"
-        Me.actionCombo.Size = New System.Drawing.Size(121, 21)
+        Me.actionCombo.Size = New System.Drawing.Size(93, 21)
         Me.actionCombo.TabIndex = 4
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(483, 35)
+        Me.Label1.Location = New System.Drawing.Point(456, 35)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(19, 13)
         Me.Label1.TabIndex = 7
@@ -231,14 +247,14 @@ Partial Class Form1
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(504, 33)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(477, 32)
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(75, 20)
         Me.NumericUpDown1.TabIndex = 8
         '
         'clearLoadButton
         '
-        Me.clearLoadButton.Location = New System.Drawing.Point(941, 250)
+        Me.clearLoadButton.Location = New System.Drawing.Point(995, 250)
         Me.clearLoadButton.Name = "clearLoadButton"
         Me.clearLoadButton.Size = New System.Drawing.Size(75, 23)
         Me.clearLoadButton.TabIndex = 9
@@ -286,14 +302,14 @@ Partial Class Form1
         '
         'rollText
         '
-        Me.rollText.Location = New System.Drawing.Point(777, 68)
+        Me.rollText.Location = New System.Drawing.Point(12, 21)
         Me.rollText.Name = "rollText"
         Me.rollText.Size = New System.Drawing.Size(70, 20)
         Me.rollText.TabIndex = 13
         '
         'rollButton
         '
-        Me.rollButton.Location = New System.Drawing.Point(853, 66)
+        Me.rollButton.Location = New System.Drawing.Point(86, 19)
         Me.rollButton.Name = "rollButton"
         Me.rollButton.Size = New System.Drawing.Size(75, 23)
         Me.rollButton.TabIndex = 14
@@ -302,7 +318,7 @@ Partial Class Form1
         '
         'rollHistory
         '
-        Me.rollHistory.Location = New System.Drawing.Point(779, 95)
+        Me.rollHistory.Location = New System.Drawing.Point(12, 49)
         Me.rollHistory.Multiline = True
         Me.rollHistory.Name = "rollHistory"
         Me.rollHistory.ReadOnly = True
@@ -323,9 +339,9 @@ Partial Class Form1
         '
         'importButton
         '
-        Me.importButton.Location = New System.Drawing.Point(504, 59)
+        Me.importButton.Location = New System.Drawing.Point(489, 59)
         Me.importButton.Name = "importButton"
-        Me.importButton.Size = New System.Drawing.Size(75, 23)
+        Me.importButton.Size = New System.Drawing.Size(48, 23)
         Me.importButton.TabIndex = 17
         Me.importButton.Text = "Import"
         Me.importButton.UseVisualStyleBackColor = True
@@ -350,7 +366,7 @@ Partial Class Form1
         '
         'resolveButton
         '
-        Me.resolveButton.Location = New System.Drawing.Point(602, 32)
+        Me.resolveButton.Location = New System.Drawing.Point(562, 31)
         Me.resolveButton.Name = "resolveButton"
         Me.resolveButton.Size = New System.Drawing.Size(75, 23)
         Me.resolveButton.TabIndex = 19
@@ -364,7 +380,7 @@ Partial Class Form1
         '
         Me.timeLabel.AutoSize = True
         Me.timeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timeLabel.Location = New System.Drawing.Point(436, 143)
+        Me.timeLabel.Location = New System.Drawing.Point(16, 11)
         Me.timeLabel.Name = "timeLabel"
         Me.timeLabel.Size = New System.Drawing.Size(158, 73)
         Me.timeLabel.TabIndex = 20
@@ -372,7 +388,7 @@ Partial Class Form1
         '
         'startButton
         '
-        Me.startButton.Location = New System.Drawing.Point(431, 214)
+        Me.startButton.Location = New System.Drawing.Point(11, 82)
         Me.startButton.Name = "startButton"
         Me.startButton.Size = New System.Drawing.Size(52, 23)
         Me.startButton.TabIndex = 21
@@ -381,7 +397,7 @@ Partial Class Form1
         '
         'stopButton
         '
-        Me.stopButton.Location = New System.Drawing.Point(489, 214)
+        Me.stopButton.Location = New System.Drawing.Point(69, 82)
         Me.stopButton.Name = "stopButton"
         Me.stopButton.Size = New System.Drawing.Size(52, 23)
         Me.stopButton.TabIndex = 22
@@ -390,7 +406,7 @@ Partial Class Form1
         '
         'resetButton
         '
-        Me.resetButton.Location = New System.Drawing.Point(547, 214)
+        Me.resetButton.Location = New System.Drawing.Point(127, 82)
         Me.resetButton.Name = "resetButton"
         Me.resetButton.Size = New System.Drawing.Size(52, 23)
         Me.resetButton.TabIndex = 23
@@ -403,31 +419,133 @@ Partial Class Form1
         '
         'resistButton
         '
-        Me.resistButton.Location = New System.Drawing.Point(504, 88)
+        Me.resistButton.Location = New System.Drawing.Point(489, 87)
         Me.resistButton.Name = "resistButton"
-        Me.resistButton.Size = New System.Drawing.Size(75, 23)
+        Me.resistButton.Size = New System.Drawing.Size(48, 23)
         Me.resistButton.TabIndex = 24
-        Me.resistButton.Text = "Resistant"
+        Me.resistButton.Text = "Resist"
         Me.resistButton.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.resetButton)
+        Me.GroupBox2.Controls.Add(Me.stopButton)
+        Me.GroupBox2.Controls.Add(Me.startButton)
+        Me.GroupBox2.Controls.Add(Me.timeLabel)
+        Me.GroupBox2.Location = New System.Drawing.Point(360, 129)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(193, 116)
+        Me.GroupBox2.TabIndex = 25
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Timer"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.rollHistory)
+        Me.GroupBox3.Controls.Add(Me.rollButton)
+        Me.GroupBox3.Controls.Add(Me.rollText)
+        Me.GroupBox3.Location = New System.Drawing.Point(561, 67)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(173, 178)
+        Me.GroupBox3.TabIndex = 26
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Roll"
+        '
+        'audioControl
+        '
+        Me.audioControl.Controls.Add(Me.TabPage1)
+        Me.audioControl.Controls.Add(Me.TabPage2)
+        Me.audioControl.Controls.Add(Me.TabPage3)
+        Me.audioControl.Location = New System.Drawing.Point(740, 27)
+        Me.audioControl.Name = "audioControl"
+        Me.audioControl.SelectedIndex = 0
+        Me.audioControl.Size = New System.Drawing.Size(336, 217)
+        Me.audioControl.TabIndex = 30
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.inTownAudio)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(328, 191)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'inTownAudio
+        '
+        Me.inTownAudio.CheckOnClick = True
+        Me.inTownAudio.FormattingEnabled = True
+        Me.inTownAudio.Location = New System.Drawing.Point(6, 6)
+        Me.inTownAudio.Name = "inTownAudio"
+        Me.inTownAudio.Size = New System.Drawing.Size(313, 169)
+        Me.inTownAudio.TabIndex = 28
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.onRoadAudio)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(328, 191)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'onRoadAudio
+        '
+        Me.onRoadAudio.CheckOnClick = True
+        Me.onRoadAudio.FormattingEnabled = True
+        Me.onRoadAudio.Location = New System.Drawing.Point(6, 6)
+        Me.onRoadAudio.Name = "onRoadAudio"
+        Me.onRoadAudio.Size = New System.Drawing.Size(313, 169)
+        Me.onRoadAudio.TabIndex = 29
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.dungeonAudio)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(328, 191)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'dungeonAudio
+        '
+        Me.dungeonAudio.CheckOnClick = True
+        Me.dungeonAudio.FormattingEnabled = True
+        Me.dungeonAudio.Location = New System.Drawing.Point(9, 6)
+        Me.dungeonAudio.Name = "dungeonAudio"
+        Me.dungeonAudio.Size = New System.Drawing.Size(313, 169)
+        Me.dungeonAudio.TabIndex = 30
+        '
+        'stopAudioButton
+        '
+        Me.stopAudioButton.Location = New System.Drawing.Point(998, 19)
+        Me.stopAudioButton.Name = "stopAudioButton"
+        Me.stopAudioButton.Size = New System.Drawing.Size(75, 23)
+        Me.stopAudioButton.TabIndex = 31
+        Me.stopAudioButton.Text = "Silence!"
+        Me.stopAudioButton.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1083, 575)
+        Me.Controls.Add(Me.stopAudioButton)
+        Me.Controls.Add(Me.audioControl)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.resistButton)
-        Me.Controls.Add(Me.resetButton)
-        Me.Controls.Add(Me.stopButton)
-        Me.Controls.Add(Me.startButton)
-        Me.Controls.Add(Me.timeLabel)
         Me.Controls.Add(Me.resolveButton)
         Me.Controls.Add(Me.desAllButton)
         Me.Controls.Add(Me.selAllButton)
         Me.Controls.Add(Me.importButton)
         Me.Controls.Add(Me.crInitButton)
-        Me.Controls.Add(Me.rollHistory)
-        Me.Controls.Add(Me.rollButton)
-        Me.Controls.Add(Me.rollText)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.clearLoadButton)
         Me.Controls.Add(Me.NumericUpDown1)
@@ -444,6 +562,14 @@ Partial Class Form1
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.audioControl.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -492,4 +618,14 @@ Partial Class Form1
     Friend WithEvents resetButton As Button
     Friend WithEvents Timer2 As Timer
     Friend WithEvents resistButton As Button
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents audioControl As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents inTownAudio As CheckedListBox
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents onRoadAudio As CheckedListBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents dungeonAudio As CheckedListBox
+    Friend WithEvents stopAudioButton As Button
 End Class

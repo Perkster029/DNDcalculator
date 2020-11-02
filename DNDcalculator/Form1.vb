@@ -1,10 +1,20 @@
 ﻿Imports System.IO
+Imports WMPLib 'Media Player in virtual form
 
 Public Class Form1
 
     Private stopwatch As New Stopwatch
     Public ThisFilename As String = Application.StartupPath & "\MyData.tsv"
     Public pubRollVal As Integer
+
+    Public inTownPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\In_Town\"
+    Public inTownFiles() As String
+    Public onRoadPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\On_Road\"
+    Public onRoadFiles() As String
+    Public dungeonPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\Dungeon\"
+    Public dungeonFiles() As String
+
+    Public Player As New WindowsMediaPlayer
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         Dim elapsed As TimeSpan = Me.stopwatch.Elapsed
@@ -168,6 +178,34 @@ Public Class Form1
         actionCombo.Items.AddRange({"is damaged", "heals"})
         'actionCombo.SelectedIndex = actionCombo.FindStringExact("Damages")
         actionCombo.SelectedIndex = 0
+
+        audioControl.TabPages(0).Text = "In Town"
+        audioControl.TabPages(1).Text = "On Road"
+        audioControl.TabPages(2).Text = "Dungeon"
+
+        inTownFiles = IO.Directory.GetFiles(inTownPath)
+        For i = 0 To inTownFiles.Count - 1
+            inTownFiles(i) = inTownFiles(i).Substring(inTownFiles(i).IndexOf(inTownPath) + Len(inTownPath))
+        Next
+        For Each file As String In inTownFiles
+            inTownAudio.Items.Add(file)
+        Next
+
+        onRoadFiles = IO.Directory.GetFiles(onRoadPath)
+        For i = 0 To onRoadFiles.Count - 1
+            onRoadFiles(i) = onRoadFiles(i).Substring(onRoadFiles(i).IndexOf(onRoadPath) + Len(onRoadPath))
+        Next
+        For Each file As String In onRoadFiles
+            onRoadAudio.Items.Add(file)
+        Next
+
+        dungeonFiles = IO.Directory.GetFiles(dungeonPath)
+        For i = 0 To dungeonFiles.Count - 1
+            dungeonFiles(i) = dungeonFiles(i).Substring(dungeonFiles(i).IndexOf(dungeonPath) + Len(dungeonPath))
+        Next
+        For Each file As String In dungeonFiles
+            dungeonAudio.Items.Add(file)
+        Next
     End Sub
 
     Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
@@ -374,6 +412,34 @@ Public Class Form1
 
     Private Sub ResistButton_Click(sender As Object, e As EventArgs) Handles resistButton.Click
         NumericUpDown1.Value = Math.Floor(NumericUpDown1.Value / 2)
+    End Sub
+
+
+    Private Sub Audio(audioPath As String)
+        Player.URL = audioPath
+        Player.settings.setMode("loop", True)
+    End Sub
+
+    Private Sub InTownAudio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles inTownAudio.SelectedIndexChanged
+        StopAudio()
+        For i = 0 To (inTownAudio.Items.Count - 1)
+            inTownAudio.SetItemChecked(i, False)
+        Next
+        'MsgBox(sender.SelectedItem.ToString)
+        'MsgBox(inTownAudio.FindStringExact(sender.ToString))
+        inTownAudio.SetItemChecked(inTownAudio.FindStringExact(sender.SelectedItem.ToString), True)
+        Audio(inTownPath & sender.SelectedItem.ToString)
+    End Sub
+
+    Private Sub StopAudio()
+        Player.close()
+        For i = 0 To (inTownAudio.Items.Count - 1)
+            inTownAudio.SetItemChecked(i, False)
+        Next
+    End Sub
+
+    Private Sub StopAudioButton_Click(sender As Object, e As EventArgs) Handles stopAudioButton.Click
+        StopAudio()
     End Sub
 
 
