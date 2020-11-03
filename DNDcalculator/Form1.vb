@@ -1,4 +1,6 @@
-﻿Imports WMPLib 'Media Player in virtual form
+﻿Imports System.Windows
+Imports System.IO
+Imports WMPLib 'Media Player in virtual form
 
 Public Class Form1
 
@@ -6,12 +8,16 @@ Public Class Form1
     Public ThisFilename As String = Application.StartupPath
     Public pubRollVal As Integer
 
-    Public inTownPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\In_Town\"
+    Public inTownPath As String = ThisFilename & "\Audio\In_Town\"
     Public inTownFiles() As String
-    Public onRoadPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\On_Road\"
+    Public onRoadPath As String = ThisFilename & "\Audio\On_Road\"
     Public onRoadFiles() As String
-    Public dungeonPath As String = "C:\Users\Perk\source\repos\DNDcalculator\DNDcalculator\Audio\Dungeon\"
+    Public dungeonPath As String = ThisFilename & "\Audio\Dungeon\"
     Public dungeonFiles() As String
+
+    Public storeCol As Integer
+    Public storeRow As Integer
+    Public storeVal As Integer
 
     Public Player As New WindowsMediaPlayer
 
@@ -25,6 +31,8 @@ Public Class Form1
         audioControl.TabPages(0).Text = "In Town"
         audioControl.TabPages(1).Text = "On Road"
         audioControl.TabPages(2).Text = "Dungeon"
+
+        rollHistory.SelectionAlignment = TextAlignment.Right 'Right justify text in rollHistory
 
         'Load all files in the "In_Town" folder @ inTownPath, add them to the first tab
         inTownFiles = IO.Directory.GetFiles(inTownPath)
@@ -60,7 +68,10 @@ Public Class Form1
         timeLabel.Text = String.Format("{0:00}:{1:00}", elapsed.Seconds, Strings.Left(elapsed.Milliseconds.ToString, 1))
     End Sub 'manual timer tick
     Private Sub Timer2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer2.Tick
-        SaveGridData(DataGridView1, Application.StartupPath & "\MyDataAutosave" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".csv")
+        If Not Directory.Exists(Application.StartupPath & "\Autosave\") Then
+            Directory.CreateDirectory(Application.StartupPath & "\Autosave\")
+        End If
+        SaveGridData(DataGridView1, Application.StartupPath & "\Autosave\MyDataAutosave" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".csv")
     End Sub 'autosave every minute
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
         Timer1.Start()
@@ -194,29 +205,41 @@ Public Class Form1
 
     'Update
     Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
+        If (e.ColumnIndex <> 1) And (e.ColumnIndex <> 14) Then
+            'MsgBox(DataGridView1.CurrentCell.Value)
+            If Not IsNumeric(DataGridView1.CurrentCell.Value) Then
+                DataGridView1.CurrentCell.Value = storeVal
+            End If
+        End If
+
+        'Now do some error handling, giving temporary names and initiatives in case of user not entering name first and clicking things
+
+        If StrComp(DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(1).Value, "", vbTextCompare) = 0 Then
+            DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(1).Value = "TempName"
+            DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(2).Value = 0
+        End If
         UpdateChar()
-    End Sub 'on any field edit, updates related objects
+    End Sub 'on any field edit, updates related objects. only allows numerics, except name and status
+
+    Private Sub DataGridView1_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridView1.CellBeginEdit
+        storeVal = DataGridView1.CurrentCell.Value
+    End Sub 'saves value, in case numeric-only field gets alpha characters
+
     Sub UpdateChar()
         Dim tempName As String
 
-        chrNameCombo1.Items.Clear()
         chrNameCheckedListBox1.Items.Clear()
 
         If DataGridView1.RowCount > 1 Then
             For i = 0 To DataGridView1.RowCount - 2
                 tempName = DataGridView1.Rows(i).Cells(1).Value
-                If Not chrNameCombo1.Items.Contains(tempName.Trim) Then
-                    chrNameCombo1.Items.Add(tempName.Trim)
-                End If
 
-                If Not chrNameCheckedListBox1.Items.Contains(tempName.Trim) Then
+                If Not IsNothing(tempName) AndAlso Not chrNameCheckedListBox1.Items.Contains(tempName.Trim) Then
                     chrNameCheckedListBox1.Items.Add(tempName.Trim)
                 End If
 
             Next i
 
-            chrNameCombo1.SelectedIndex = 0
-            'chrNameCombo1.SelectedIndex = chrNameCombo1.FindStringExact(DataGridView1.Rows(0).Cells(0).Value.Trim)
         End If
 
         For i = 0 To DataGridView1.RowCount - 2
@@ -233,7 +256,7 @@ Public Class Form1
         Dim listToSort As New List(Of Tuple(Of String, Double))
 
         For i = 0 To DataGridView1.RowCount - 2
-            If Not IsNothing(DataGridView1.Rows(i).Cells(2)) And StrComp(DataGridView1.Rows(i).Cells(2).Value.ToString, "", vbTextCompare) <> 0 Then
+            If Not (IsNothing(DataGridView1.Rows(i).Cells(2))) AndAlso StrComp(DataGridView1.Rows(i).Cells(2).Value.ToString, "", vbTextCompare) <> 0 Then
                 If Asc(DataGridView1.Rows(i).Cells(2).Value) >= 48 And Asc(DataGridView1.Rows(i).Cells(2).Value) <= 57 Then
                     If CDbl(DataGridView1.Rows(i).Cells(2).Value) > 0 Then
                         listToSort.Add(Tuple.Create(DataGridView1.Rows(i).Cells(1).Value.ToString, CDbl(DataGridView1.Rows(i).Cells(2).Value)))
@@ -351,10 +374,23 @@ Public Class Form1
 
         rollHistory.Text = "( " & tempText & " ) " & rollTotal & vbNewLine & rollHistory.Text 'display raw rolls and modifier in parenthesis, and final total at the end.
         'this also appends whatever text already existed to the end, so we always have the LAST roll displayed at the top
+
         If count > 0 And sides = 20 Then 'if a d20 and we had any Nat20s...
             rollHistory.Text = count & " Nat 20(s)!!!" & vbNewLine & rollHistory.Text '...show our Nat20 count
         End If
         rollHistory.Text = "Rolled " & numDie & " " & sides & " sided die " & rollModText & vbNewLine & rollHistory.Text 'in English, display what was rolled
+
+        'MsgBox(rollHistory.Text.ToString.IndexOf(")") + 2 & " " & Len(rollTotal.ToString.Trim) & " " & rollTotal)
+        rollHistory.SelectionStart = rollHistory.Text.ToString.IndexOf(") ") + 2
+        rollHistory.SelectionLength = Len(rollTotal.ToString.Trim)
+
+        If rollHistory.SelectionFont IsNot Nothing Then
+            Dim currentFont As System.Drawing.Font = rollHistory.SelectionFont
+            Dim newFontStyle As System.Drawing.FontStyle
+            newFontStyle = currentFont.Style + Drawing.FontStyle.Bold
+
+            rollHistory.SelectionFont = New Drawing.Font(currentFont.FontFamily, currentFont.Size, newFontStyle)
+        End If
 
     End Sub
 
@@ -362,7 +398,6 @@ Public Class Form1
         Dim diceRoll As Integer
         Randomize() 'initialize random generator
         Dim rand As Single = Rnd() 'get a random number (lots of decimals) between 0 and 1
-        MsgBox(rand)
 
         'basically, we're breaking up the (0-1) range into discrete chunks. if our "rand" falls in a chunk, that's the number we "rolled"
         'it's Price Is Right rules, closest without going over.

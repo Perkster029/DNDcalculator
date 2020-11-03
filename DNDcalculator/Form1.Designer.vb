@@ -40,7 +40,6 @@ Partial Class Form1
         Me.chrWIS = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chrCHA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrNameCombo1 = New System.Windows.Forms.ComboBox()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.loadButton = New System.Windows.Forms.Button()
         Me.chrNameCheckedListBox1 = New System.Windows.Forms.CheckedListBox()
@@ -54,7 +53,6 @@ Partial Class Form1
         Me.initBox = New System.Windows.Forms.TextBox()
         Me.rollText = New System.Windows.Forms.TextBox()
         Me.rollButton = New System.Windows.Forms.Button()
-        Me.rollHistory = New System.Windows.Forms.TextBox()
         Me.crInitButton = New System.Windows.Forms.Button()
         Me.importButton = New System.Windows.Forms.Button()
         Me.selAllButton = New System.Windows.Forms.Button()
@@ -77,6 +75,7 @@ Partial Class Form1
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dungeonAudio = New System.Windows.Forms.CheckedListBox()
         Me.stopAudioButton = New System.Windows.Forms.Button()
+        Me.rollHistory = New System.Windows.Forms.RichTextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -194,14 +193,6 @@ Partial Class Form1
         Me.status.HeaderText = "Status"
         Me.status.Name = "status"
         '
-        'chrNameCombo1
-        '
-        Me.chrNameCombo1.FormattingEnabled = True
-        Me.chrNameCombo1.Location = New System.Drawing.Point(30, 250)
-        Me.chrNameCombo1.Name = "chrNameCombo1"
-        Me.chrNameCombo1.Size = New System.Drawing.Size(121, 21)
-        Me.chrNameCombo1.TabIndex = 1
-        '
         'saveButton
         '
         Me.saveButton.Location = New System.Drawing.Point(833, 250)
@@ -316,18 +307,6 @@ Partial Class Form1
         Me.rollButton.TabIndex = 14
         Me.rollButton.Text = "Roll"
         Me.rollButton.UseVisualStyleBackColor = True
-        '
-        'rollHistory
-        '
-        Me.rollHistory.Location = New System.Drawing.Point(12, 49)
-        Me.rollHistory.Multiline = True
-        Me.rollHistory.Name = "rollHistory"
-        Me.rollHistory.ReadOnly = True
-        Me.rollHistory.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.rollHistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.rollHistory.Size = New System.Drawing.Size(149, 117)
-        Me.rollHistory.TabIndex = 15
-        Me.rollHistory.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'crInitButton
         '
@@ -532,6 +511,15 @@ Partial Class Form1
         Me.stopAudioButton.Text = "Silence!"
         Me.stopAudioButton.UseVisualStyleBackColor = True
         '
+        'rollHistory
+        '
+        Me.rollHistory.Location = New System.Drawing.Point(12, 50)
+        Me.rollHistory.Name = "rollHistory"
+        Me.rollHistory.ReadOnly = True
+        Me.rollHistory.Size = New System.Drawing.Size(149, 117)
+        Me.rollHistory.TabIndex = 16
+        Me.rollHistory.Text = ""
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -555,7 +543,6 @@ Partial Class Form1
         Me.Controls.Add(Me.actionCombo)
         Me.Controls.Add(Me.loadButton)
         Me.Controls.Add(Me.saveButton)
-        Me.Controls.Add(Me.chrNameCombo1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
@@ -578,7 +565,6 @@ Partial Class Form1
     End Sub
 
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents chrNameCombo1 As ComboBox
     Friend WithEvents saveButton As Button
     Friend WithEvents loadButton As Button
     Friend WithEvents chrNameCheckedListBox1 As CheckedListBox
@@ -592,7 +578,6 @@ Partial Class Form1
     Friend WithEvents initBox As TextBox
     Friend WithEvents rollText As TextBox
     Friend WithEvents rollButton As Button
-    Friend WithEvents rollHistory As TextBox
     Friend WithEvents crInitButton As Button
     Friend WithEvents importButton As Button
     Friend WithEvents orderNum As DataGridViewTextBoxColumn
@@ -630,4 +615,5 @@ Partial Class Form1
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents dungeonAudio As CheckedListBox
     Friend WithEvents stopAudioButton As Button
+    Friend WithEvents rollHistory As RichTextBox
 End Class
