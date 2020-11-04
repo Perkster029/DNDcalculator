@@ -204,8 +204,8 @@ Public Class Form1
     End Sub 'asks for confirmation, opens dialog to choose Load file, runs ClearLoadGridData 
 
     'Update
-    Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
-        If (e.ColumnIndex <> 1) And (e.ColumnIndex <> 14) Then
+    Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit 'Make sure things are numeric
+        If (e.ColumnIndex <> 1) And (e.ColumnIndex <> 15) Then 'Names and Status are allowed to be text. Restore to previous value if needed
             'MsgBox(DataGridView1.CurrentCell.Value)
             If Not IsNumeric(DataGridView1.CurrentCell.Value) Then
                 DataGridView1.CurrentCell.Value = storeVal
