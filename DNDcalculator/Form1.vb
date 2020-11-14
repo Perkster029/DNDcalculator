@@ -4,6 +4,8 @@ Imports WMPLib 'Media Player in virtual form
 
 Public Class Form1
 
+    Public Generator As System.Random = New System.Random() 'initialize random generator
+
     Public stopwatch As New Stopwatch
     Public ThisFilename As String = Application.StartupPath
     Public pubRollVal As Integer
@@ -395,21 +397,7 @@ Public Class Form1
     End Sub
 
     Function SingleDie(ByVal sides As Integer)
-        Dim diceRoll As Integer
-        Randomize() 'initialize random generator
-        Dim rand As Single = Rnd() 'get a random number (lots of decimals) between 0 and 1
-
-        'basically, we're breaking up the (0-1) range into discrete chunks. if our "rand" falls in a chunk, that's the number we "rolled"
-        'it's Price Is Right rules, closest without going over.
-        'rand = 0.254 on a d4 gives us a "2" as a result (0-0.24999999999)=1;(0.25-0.499999999)=2;(0.5-0.7499999999)=3;(0.75-0.999999999)=4
-
-        For cnt As Integer = 1 To sides
-            If rand < cnt / sides Then
-                diceRoll = cnt
-                Exit For
-            End If
-        Next
-        Return diceRoll
+        Return Generator.Next(1, sides + 1) 'includes lower bound, excludes upper bound
     End Function 'rolls a single die of a given # of sides
 
     Private Sub RollButton_Click(sender As Object, e As EventArgs) Handles rollButton.Click
