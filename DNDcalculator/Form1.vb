@@ -558,6 +558,8 @@ Public Class Form1
     End Sub 'on click, run StopAudio Sub
 
     Private Sub UndoButton_Click(sender As Object, e As EventArgs) Handles undoButton.Click
+
+        damageHistory.Text = chrNameCheckedListBox1.Items(undoRow).ToString & " " & DataGridView1.Rows(undoRow).Cells(4).Value & " | -> | " & undoHP & vbLf & damageHistory.Text
         DataGridView1.Rows(undoRow).Cells(4).Value = undoHP
     End Sub
 
