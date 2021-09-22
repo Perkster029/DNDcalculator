@@ -355,7 +355,7 @@ Partial Class Form1
         '
         'resolveButton
         '
-        Me.resolveButton.Location = New System.Drawing.Point(547, 31)
+        Me.resolveButton.Location = New System.Drawing.Point(551, 31)
         Me.resolveButton.Name = "resolveButton"
         Me.resolveButton.Size = New System.Drawing.Size(75, 23)
         Me.resolveButton.TabIndex = 19
@@ -532,7 +532,7 @@ Partial Class Form1
         '
         'undoButton
         '
-        Me.undoButton.Location = New System.Drawing.Point(632, 31)
+        Me.undoButton.Location = New System.Drawing.Point(639, 31)
         Me.undoButton.Name = "undoButton"
         Me.undoButton.Size = New System.Drawing.Size(75, 23)
         Me.undoButton.TabIndex = 32
