@@ -25,6 +25,22 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.orderNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrInit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrInitMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.currentHP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.maxHP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrAC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.charSpeed = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dcSave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrSTR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrDEX = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrCON = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrINT = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrWIS = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.chrCHA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.loadButton = New System.Windows.Forms.Button()
         Me.chrNameCheckedListBox1 = New System.Windows.Forms.CheckedListBox()
@@ -61,22 +77,8 @@ Partial Class Form1
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dungeonAudio = New System.Windows.Forms.CheckedListBox()
         Me.stopAudioButton = New System.Windows.Forms.Button()
-        Me.orderNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrInit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrInitMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.currentHP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.maxHP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrAC = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.charSpeed = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dcSave = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrSTR = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrDEX = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrCON = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrINT = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrWIS = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.chrCHA = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.undoButton = New System.Windows.Forms.Button()
+        Me.damageHistory = New System.Windows.Forms.RichTextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -99,6 +101,106 @@ Partial Class Form1
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.Size = New System.Drawing.Size(1051, 284)
         Me.DataGridView1.TabIndex = 0
+        '
+        'orderNum
+        '
+        Me.orderNum.HeaderText = "#"
+        Me.orderNum.Name = "orderNum"
+        Me.orderNum.ReadOnly = True
+        Me.orderNum.Width = 30
+        '
+        'chrName
+        '
+        Me.chrName.HeaderText = "Character Name"
+        Me.chrName.Name = "chrName"
+        Me.chrName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.chrName.Width = 140
+        '
+        'chrInit
+        '
+        Me.chrInit.HeaderText = "Initiative"
+        Me.chrInit.Name = "chrInit"
+        Me.chrInit.Width = 80
+        '
+        'chrInitMod
+        '
+        Me.chrInitMod.HeaderText = "Init Mod"
+        Me.chrInitMod.Name = "chrInitMod"
+        Me.chrInitMod.Width = 70
+        '
+        'currentHP
+        '
+        Me.currentHP.HeaderText = "HP"
+        Me.currentHP.Name = "currentHP"
+        Me.currentHP.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.currentHP.Width = 40
+        '
+        'maxHP
+        '
+        Me.maxHP.HeaderText = "Max HP"
+        Me.maxHP.Name = "maxHP"
+        Me.maxHP.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.maxHP.Width = 60
+        '
+        'chrAC
+        '
+        Me.chrAC.HeaderText = "AC"
+        Me.chrAC.Name = "chrAC"
+        Me.chrAC.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.chrAC.Width = 40
+        '
+        'charSpeed
+        '
+        Me.charSpeed.HeaderText = "Speed"
+        Me.charSpeed.Name = "charSpeed"
+        Me.charSpeed.Width = 80
+        '
+        'dcSave
+        '
+        Me.dcSave.HeaderText = "DC"
+        Me.dcSave.Name = "dcSave"
+        Me.dcSave.Width = 40
+        '
+        'chrSTR
+        '
+        Me.chrSTR.HeaderText = "STR"
+        Me.chrSTR.Name = "chrSTR"
+        Me.chrSTR.Width = 50
+        '
+        'chrDEX
+        '
+        Me.chrDEX.HeaderText = "DEX"
+        Me.chrDEX.Name = "chrDEX"
+        Me.chrDEX.Width = 50
+        '
+        'chrCON
+        '
+        Me.chrCON.HeaderText = "CON"
+        Me.chrCON.Name = "chrCON"
+        Me.chrCON.Width = 50
+        '
+        'chrINT
+        '
+        Me.chrINT.HeaderText = "INT"
+        Me.chrINT.Name = "chrINT"
+        Me.chrINT.Width = 50
+        '
+        'chrWIS
+        '
+        Me.chrWIS.HeaderText = "WIS"
+        Me.chrWIS.Name = "chrWIS"
+        Me.chrWIS.Width = 50
+        '
+        'chrCHA
+        '
+        Me.chrCHA.HeaderText = "CHA"
+        Me.chrCHA.Name = "chrCHA"
+        Me.chrCHA.Width = 50
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.Name = "status"
         '
         'saveButton
         '
@@ -226,7 +328,7 @@ Partial Class Form1
         '
         'importButton
         '
-        Me.importButton.Location = New System.Drawing.Point(474, 59)
+        Me.importButton.Location = New System.Drawing.Point(489, 59)
         Me.importButton.Name = "importButton"
         Me.importButton.Size = New System.Drawing.Size(48, 23)
         Me.importButton.TabIndex = 17
@@ -306,7 +408,7 @@ Partial Class Form1
         '
         'resistButton
         '
-        Me.resistButton.Location = New System.Drawing.Point(474, 87)
+        Me.resistButton.Location = New System.Drawing.Point(489, 87)
         Me.resistButton.Name = "resistButton"
         Me.resistButton.Size = New System.Drawing.Size(48, 23)
         Me.resistButton.TabIndex = 24
@@ -343,6 +445,7 @@ Partial Class Form1
         Me.rollHistory.Location = New System.Drawing.Point(12, 50)
         Me.rollHistory.Name = "rollHistory"
         Me.rollHistory.ReadOnly = True
+        Me.rollHistory.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.rollHistory.Size = New System.Drawing.Size(149, 117)
         Me.rollHistory.TabIndex = 16
         Me.rollHistory.Text = ""
@@ -427,111 +530,32 @@ Partial Class Form1
         Me.stopAudioButton.Text = "Silence!"
         Me.stopAudioButton.UseVisualStyleBackColor = True
         '
-        'orderNum
+        'undoButton
         '
-        Me.orderNum.HeaderText = "#"
-        Me.orderNum.Name = "orderNum"
-        Me.orderNum.ReadOnly = True
-        Me.orderNum.Width = 30
+        Me.undoButton.Location = New System.Drawing.Point(632, 31)
+        Me.undoButton.Name = "undoButton"
+        Me.undoButton.Size = New System.Drawing.Size(75, 23)
+        Me.undoButton.TabIndex = 32
+        Me.undoButton.Text = "Undo"
+        Me.undoButton.UseVisualStyleBackColor = True
         '
-        'chrName
+        'damageHistory
         '
-        Me.chrName.HeaderText = "Character Name"
-        Me.chrName.Name = "chrName"
-        Me.chrName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.chrName.Width = 140
-        '
-        'chrInit
-        '
-        Me.chrInit.HeaderText = "Initiative"
-        Me.chrInit.Name = "chrInit"
-        Me.chrInit.Width = 80
-        '
-        'chrInitMod
-        '
-        Me.chrInitMod.HeaderText = "Init Mod"
-        Me.chrInitMod.Name = "chrInitMod"
-        Me.chrInitMod.Width = 70
-        '
-        'currentHP
-        '
-        Me.currentHP.HeaderText = "HP"
-        Me.currentHP.Name = "currentHP"
-        Me.currentHP.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.currentHP.Width = 40
-        '
-        'maxHP
-        '
-        Me.maxHP.HeaderText = "Max HP"
-        Me.maxHP.Name = "maxHP"
-        Me.maxHP.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.maxHP.Width = 60
-        '
-        'chrAC
-        '
-        Me.chrAC.HeaderText = "AC"
-        Me.chrAC.Name = "chrAC"
-        Me.chrAC.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.chrAC.Width = 40
-        '
-        'charSpeed
-        '
-        Me.charSpeed.HeaderText = "Speed"
-        Me.charSpeed.Name = "charSpeed"
-        Me.charSpeed.Width = 80
-        '
-        'dcSave
-        '
-        Me.dcSave.HeaderText = "DC"
-        Me.dcSave.Name = "dcSave"
-        Me.dcSave.Width = 40
-        '
-        'chrSTR
-        '
-        Me.chrSTR.HeaderText = "STR"
-        Me.chrSTR.Name = "chrSTR"
-        Me.chrSTR.Width = 50
-        '
-        'chrDEX
-        '
-        Me.chrDEX.HeaderText = "DEX"
-        Me.chrDEX.Name = "chrDEX"
-        Me.chrDEX.Width = 50
-        '
-        'chrCON
-        '
-        Me.chrCON.HeaderText = "CON"
-        Me.chrCON.Name = "chrCON"
-        Me.chrCON.Width = 50
-        '
-        'chrINT
-        '
-        Me.chrINT.HeaderText = "INT"
-        Me.chrINT.Name = "chrINT"
-        Me.chrINT.Width = 50
-        '
-        'chrWIS
-        '
-        Me.chrWIS.HeaderText = "WIS"
-        Me.chrWIS.Name = "chrWIS"
-        Me.chrWIS.Width = 50
-        '
-        'chrCHA
-        '
-        Me.chrCHA.HeaderText = "CHA"
-        Me.chrCHA.Name = "chrCHA"
-        Me.chrCHA.Width = 50
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.Name = "status"
+        Me.damageHistory.Location = New System.Drawing.Point(344, 61)
+        Me.damageHistory.Name = "damageHistory"
+        Me.damageHistory.ReadOnly = True
+        Me.damageHistory.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
+        Me.damageHistory.Size = New System.Drawing.Size(139, 49)
+        Me.damageHistory.TabIndex = 33
+        Me.damageHistory.Text = ""
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1074, 575)
+        Me.Controls.Add(Me.damageHistory)
+        Me.Controls.Add(Me.undoButton)
         Me.Controls.Add(Me.stopAudioButton)
         Me.Controls.Add(Me.audioControl)
         Me.Controls.Add(Me.GroupBox3)
@@ -624,4 +648,6 @@ Partial Class Form1
     Friend WithEvents chrWIS As DataGridViewTextBoxColumn
     Friend WithEvents chrCHA As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents undoButton As Button
+    Friend WithEvents damageHistory As RichTextBox
 End Class

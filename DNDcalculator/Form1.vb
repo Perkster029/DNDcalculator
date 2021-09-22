@@ -20,6 +20,8 @@ Public Class Form1
     Public storeCol As Integer
     Public storeRow As Integer
     Public storeVal As Integer
+    Public undoHP As Integer
+    Public undoRow As Integer
 
     Public Player As New WindowsMediaPlayer
 
@@ -35,6 +37,7 @@ Public Class Form1
         audioControl.TabPages(2).Text = "Dungeon"
 
         rollHistory.SelectionAlignment = TextAlignment.Right 'Right justify text in rollHistory
+        damageHistory.SelectionAlignment = TextAlignment.Right 'Right justify text in damageHistory
 
         'Load all files in the "In_Town" folder @ inTownPath, add them to the first tab
         inTownFiles = IO.Directory.GetFiles(inTownPath)
@@ -62,6 +65,10 @@ Public Class Form1
         For Each file As String In dungeonFiles
             dungeonAudio.Items.Add(file)
         Next
+
+        undoHP = 0 'initialize
+        undoRow = 1 'initialize
+
     End Sub
 
     'Begin Timer Section 
@@ -224,7 +231,13 @@ Public Class Form1
     End Sub 'on any field edit, updates related objects. only allows numerics, except name and status
 
     Private Sub DataGridView1_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridView1.CellBeginEdit
-        storeVal = DataGridView1.CurrentCell.Value
+        Try
+            storeVal = DataGridView1.CurrentCell.Value
+        Catch castEx As system.InvalidCastException
+            storeVal = 0
+        Catch otherEx As Exception
+            storeVal = 0
+        End Try
     End Sub 'saves value, in case numeric-only field gets alpha characters
 
     Sub UpdateChar()
@@ -432,16 +445,19 @@ Public Class Form1
 
         Dim modifier As Integer = 1 'damage vs healing. 1=damage, -1 = healing
         If StrComp(actionCombo.Text, "is healed", vbTextCompare) = 0 Then 'if "is healed" is chosen...
-            modifier = -1 '...assign the helaing modifier
+            modifier = -1 '...assign the healing modifier
         End If
         For j = 0 To chrNameCheckedListBox1.Items.Count - 1
             If chrNameCheckedListBox1.GetItemChecked(j) Then 'if a character is checked...
                 For k = 0 To DataGridView1.RowCount - 2 '...go through all characters...
                     If StrComp(DataGridView1.Rows(k).Cells(1).Value, chrNameCheckedListBox1.Items(j).ToString, vbTextCompare) = 0 Then '...find the checked/chosen one...
+                        undoRow = k
+                        undoHP = DataGridView1.Rows(k).Cells(4).Value
                         DataGridView1.Rows(k).Cells(4).Value -= modifier * NumericUpDown1.Value '...and subtract the amount in the numeric box. Hence the healing being negative.
                         If DataGridView1.Rows(k).Cells(4).Value > DataGridView1.Rows(k).Cells(5).Value Then 'if we've healed beyond Max HP...
                             DataGridView1.Rows(k).Cells(4).Value = DataGridView1.Rows(k).Cells(5).Value '...set to Max HP
                         End If
+                        damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(4).Value & vbLf & damageHistory.Text
                         'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
                         '    DataGridView1.Rows(k).Cells(4).Value = 0
                         'End If
@@ -540,6 +556,12 @@ Public Class Form1
     Private Sub StopAudioButton_Click(sender As Object, e As EventArgs) Handles stopAudioButton.Click
         StopAudio()
     End Sub 'on click, run StopAudio Sub
+
+    Private Sub UndoButton_Click(sender As Object, e As EventArgs) Handles undoButton.Click
+        DataGridView1.Rows(undoRow).Cells(4).Value = undoHP
+    End Sub
+
+
     'End Audio Section
 
 
