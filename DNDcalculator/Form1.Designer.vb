@@ -79,6 +79,9 @@ Partial Class Form1
         Me.stopAudioButton = New System.Windows.Forms.Button()
         Me.undoButton = New System.Windows.Forms.Button()
         Me.damageHistory = New System.Windows.Forms.RichTextBox()
+        Me.DCupdown = New System.Windows.Forms.NumericUpDown()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.resistCheckBox = New System.Windows.Forms.CheckBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -88,6 +91,7 @@ Partial Class Form1
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        CType(Me.DCupdown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -98,7 +102,6 @@ Partial Class Form1
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.orderNum, Me.chrName, Me.chrInit, Me.chrInitMod, Me.currentHP, Me.maxHP, Me.chrAC, Me.charSpeed, Me.dcSave, Me.chrSTR, Me.chrDEX, Me.chrCON, Me.chrINT, Me.chrWIS, Me.chrCHA, Me.status})
         Me.DataGridView1.Location = New System.Drawing.Point(12, 279)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.Size = New System.Drawing.Size(1051, 284)
         Me.DataGridView1.TabIndex = 0
@@ -550,11 +553,40 @@ Partial Class Form1
         Me.damageHistory.TabIndex = 33
         Me.damageHistory.Text = ""
         '
+        'DCupdown
+        '
+        Me.DCupdown.Location = New System.Drawing.Point(462, 8)
+        Me.DCupdown.Name = "DCupdown"
+        Me.DCupdown.Size = New System.Drawing.Size(75, 20)
+        Me.DCupdown.TabIndex = 34
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(439, 11)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(22, 13)
+        Me.Label2.TabIndex = 35
+        Me.Label2.Text = "DC"
+        '
+        'resistCheckBox
+        '
+        Me.resistCheckBox.AutoSize = True
+        Me.resistCheckBox.Location = New System.Drawing.Point(544, 10)
+        Me.resistCheckBox.Name = "resistCheckBox"
+        Me.resistCheckBox.Size = New System.Drawing.Size(55, 17)
+        Me.resistCheckBox.TabIndex = 36
+        Me.resistCheckBox.Text = "Resist"
+        Me.resistCheckBox.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1074, 575)
+        Me.Controls.Add(Me.resistCheckBox)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.DCupdown)
         Me.Controls.Add(Me.damageHistory)
         Me.Controls.Add(Me.undoButton)
         Me.Controls.Add(Me.stopAudioButton)
@@ -591,6 +623,7 @@ Partial Class Form1
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
+        CType(Me.DCupdown, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -651,4 +684,7 @@ Partial Class Form1
     Friend WithEvents status As DataGridViewTextBoxColumn
     Friend WithEvents undoButton As Button
     Friend WithEvents damageHistory As RichTextBox
+    Friend WithEvents DCupdown As NumericUpDown
+    Friend WithEvents Label2 As Label
+    Friend WithEvents resistCheckBox As CheckBox
 End Class

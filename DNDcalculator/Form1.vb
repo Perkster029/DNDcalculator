@@ -23,13 +23,29 @@ Public Class Form1
     Public undoHP As Integer
     Public undoRow As Integer
 
+    Public NAMEcol As Integer = 1
+    Public INITcol As Integer = 2
+    Public INITMODcol As Integer = 3
+    Public HPcol As Integer = 4
+    Public MAXHPcol As Integer = 5
+    Public ACcol As Integer = 6
+    Public SPEEDcol As Integer = 7
+    Public DCSAVEcol As Integer = 8
+    Public STRcol As Integer = 9
+    Public DEXcol As Integer = 10
+    Public CONcol As Integer = 11
+    Public INTcol As Integer = 12
+    Public WIScol As Integer = 13
+    Public CHAcol As Integer = 14
+    Public STATUScol As Integer = 15
+
     Public Player As New WindowsMediaPlayer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer2.Start()  'Timer 2 is responsible for autosave every 1 minute
         rollText.Text = "d20"
 
-        actionCombo.Items.AddRange({"is damaged", "is healed"})
+        actionCombo.Items.AddRange({"is damaged", "is healed", "STR Check", "DEX Check", "CON Check", "INT Check", "WIS Check", "CHA Check"})
         actionCombo.SelectedIndex = 0
 
         audioControl.TabPages(0).Text = "In Town"
@@ -117,14 +133,17 @@ Public Class Form1
         End If
     End Sub 'opens dialog to choose SaveAs file location, runs SaveGridData
     Private Sub SaveGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
+        DataGridView1.RowHeadersVisible = False
         ThisGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         ThisGrid.SelectAll()
         IO.File.WriteAllText(Filename, ThisGrid.GetClipboardContent().GetText.TrimEnd)
         ThisGrid.ClearSelection()
+        DataGridView1.RowHeadersVisible = True
     End Sub 'saves character data to .txt file (with headers)
 
     'Load
     Private Sub LoadButton_Click(sender As Object, e As EventArgs) Handles loadButton.Click
+        DataGridView1.RowHeadersVisible = False
         Dim fd As OpenFileDialog = New OpenFileDialog With {
             .Title = "Open File Dialog",
             .InitialDirectory = ThisFilename,
@@ -138,13 +157,14 @@ Public Class Form1
             LoadGridData(DataGridView1, ThisFilename)
             UpdateChar()
         End If
-
+        DataGridView1.RowHeadersVisible = True
     End Sub 'opens dialog to choose Load file, runs LoadGridData
     Private Sub LoadGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
-        Dim tempName1 As String
-        Dim tempName2 As String
-        Dim boolFlag As Boolean
+        'Dim tempName1 As String
+        'Dim tempName2 As String
+        'Dim boolFlag As Boolean
         Dim headerLine As Boolean = True
+        DataGridView1.RowHeadersVisible = False
 
         'ThisGrid.Rows.Clear()
         For Each ThisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(vbLf) 'Split(Environment.NewLine)
@@ -160,31 +180,35 @@ Public Class Form1
                 Continue For
             End If
 
-            boolFlag = True
-            For i = 0 To DataGridView1.RowCount - 2
-                tempName1 = DataGridView1.Rows(i).Cells(1).Value
-                'MsgBox(tempName1)
-                tempName2 = Strings.Left(ThisLine, ThisLine.IndexOf(vbTab, ThisLine.IndexOf(vbTab) + 1))
-                'MsgBox(tempName2)
-                If Strings.Left(tempName2, 2).ToString.Trim.Length = 2 Then
-                    tempName2 = Mid(tempName2, 3)
-                Else
-                    tempName2 = Mid(tempName2, 2)
-                End If
+            'Commented section used to prevent duplicate entries from being loaded. No longer desired behavior
 
-                's.IndexOf(',', s.IndexOf(',') + 1);
-                'MsgBox(tempName2)
+            'boolFlag = True
+            'For i = 0 To DataGridView1.RowCount - 2
+            '    tempName1 = DataGridView1.Rows(i).Cells(1).Value
+            '    'MsgBox(tempName1)
+            '    tempName2 = Strings.Left(ThisLine, ThisLine.IndexOf(vbTab, ThisLine.IndexOf(vbTab) + 1))
+            '    'MsgBox(tempName2)
+            '    If Strings.Left(tempName2, 2).ToString.Trim.Length = 2 Then
+            '        tempName2 = Mid(tempName2, 3)
+            '    Else
+            '        tempName2 = Mid(tempName2, 2)
+            '    End If
 
-                If StrComp(tempName1.Trim, tempName2.Trim, CompareMethod.Text) = 0 Then
-                    boolFlag = False
-                    Exit For
-                End If
-            Next i
+            '    's.IndexOf(',', s.IndexOf(',') + 1);
+            '    'MsgBox(tempName2)
 
-            If boolFlag Then
-                ThisGrid.Rows.Add(Split(ThisLine, vbTab))
-            End If
+            '    If StrComp(tempName1.Trim, tempName2.Trim, CompareMethod.Text) = 0 Then
+            '        boolFlag = False
+            '        Exit For
+            '    End If
+            'Next i
+
+            'If boolFlag Then
+            ThisGrid.Rows.Add(Split(ThisLine, vbTab))
+            'End If
         Next
+
+        DataGridView1.RowHeadersVisible = True
 
     End Sub
     Private Sub ClearLoadGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
@@ -217,7 +241,7 @@ Public Class Form1
 
     'Update
     Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit 'Make sure things are numeric
-        If (e.ColumnIndex <> 1) And (e.ColumnIndex <> 15) Then 'Names and Status are allowed to be text. Restore to previous value if needed
+        If (e.ColumnIndex <> NAMEcol) And (e.ColumnIndex <> STATUScol) Then 'Names and Status are allowed to be text. Restore to previous value if needed
             'MsgBox(DataGridView1.CurrentCell.Value)
             If Not IsNumeric(DataGridView1.CurrentCell.Value) Then
                 DataGridView1.CurrentCell.Value = storeVal
@@ -226,9 +250,9 @@ Public Class Form1
 
         'Now do some error handling, giving temporary names and initiatives in case of user not entering name first and clicking things
 
-        If StrComp(DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(1).Value, "", vbTextCompare) = 0 Then
-            DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(1).Value = "TempName"
-            DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(2).Value = 0
+        If StrComp(DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(NAMEcol).Value, "", vbTextCompare) = 0 Then
+            DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(NAMEcol).Value = "TempName"
+            DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex).Cells(INITcol).Value = 0
         End If
         UpdateChar()
     End Sub 'on any field edit, updates related objects. only allows numerics, except name and status
@@ -236,7 +260,7 @@ Public Class Form1
     Private Sub DataGridView1_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridView1.CellBeginEdit
         Try
             storeVal = DataGridView1.CurrentCell.Value
-        Catch castEx As system.InvalidCastException
+        Catch castEx As System.InvalidCastException
             storeVal = 0
         Catch otherEx As Exception
             storeVal = 0
@@ -250,7 +274,7 @@ Public Class Form1
 
         If DataGridView1.RowCount > 1 Then
             For i = 0 To DataGridView1.RowCount - 2
-                tempName = DataGridView1.Rows(i).Cells(1).Value
+                tempName = DataGridView1.Rows(i).Cells(NAMEcol).Value
 
                 If Not IsNothing(tempName) AndAlso Not chrNameCheckedListBox1.Items.Contains(tempName.Trim) Then
                     chrNameCheckedListBox1.Items.Add(tempName.Trim)
@@ -274,10 +298,10 @@ Public Class Form1
         Dim listToSort As New List(Of Tuple(Of String, Double))
 
         For i = 0 To DataGridView1.RowCount - 2
-            If Not (IsNothing(DataGridView1.Rows(i).Cells(2))) AndAlso StrComp(DataGridView1.Rows(i).Cells(2).Value.ToString, "", vbTextCompare) <> 0 Then
-                If Asc(DataGridView1.Rows(i).Cells(2).Value) >= 48 And Asc(DataGridView1.Rows(i).Cells(2).Value) <= 57 Then
-                    If CDbl(DataGridView1.Rows(i).Cells(2).Value) > 0 Then
-                        listToSort.Add(Tuple.Create(DataGridView1.Rows(i).Cells(1).Value.ToString, CDbl(DataGridView1.Rows(i).Cells(2).Value)))
+            If Not (IsNothing(DataGridView1.Rows(i).Cells(INITcol))) AndAlso StrComp(DataGridView1.Rows(i).Cells(2).Value.ToString, "", vbTextCompare) <> 0 Then
+                If Asc(DataGridView1.Rows(i).Cells(INITcol).Value) >= 48 And Asc(DataGridView1.Rows(i).Cells(2).Value) <= 57 Then
+                    If CDbl(DataGridView1.Rows(i).Cells(INITcol).Value) > 0 Then
+                        listToSort.Add(Tuple.Create(DataGridView1.Rows(i).Cells(NAMEcol).Value.ToString, CDbl(DataGridView1.Rows(i).Cells(INITcol).Value)))
                     End If
                 End If
             End If
@@ -299,9 +323,9 @@ Public Class Form1
     Private Sub CrInitButton_Click(sender As Object, e As EventArgs) Handles crInitButton.Click
 
         For i = 0 To DataGridView1.RowCount - 2
-            DataGridView1.Rows(i).Cells(2).Value = ""
-            If DataGridView1.Rows(i).Cells(3).Value = "" Then
-                DataGridView1.Rows(i).Cells(3).Value = "0"
+            DataGridView1.Rows(i).Cells(INITcol).Value = ""
+            If DataGridView1.Rows(i).Cells(INITMODcol).Value = "" Then
+                DataGridView1.Rows(i).Cells(INITMODcol).Value = "0"
             End If
         Next
 
@@ -313,8 +337,8 @@ Public Class Form1
             If chrNameCheckedListBox1.GetItemChecked(j) Then
                 'Do something if Item is checked
                 For k = 0 To DataGridView1.RowCount - 2
-                    If StrComp(Item.ToString.Trim, DataGridView1.Rows(k).Cells(1).Value.Trim, vbTextCompare) = 0 Then
-                        DataGridView1.Rows(k).Cells(2).Value = CStr(SingleDie(20) + CDbl(DataGridView1.Rows(k).Cells(3).Value))
+                    If StrComp(Item.ToString.Trim, DataGridView1.Rows(k).Cells(NAMEcol).Value.Trim, vbTextCompare) = 0 Then
+                        DataGridView1.Rows(k).Cells(INITcol).Value = CStr(SingleDie(20) + CDbl(DataGridView1.Rows(k).Cells(INITMODcol).Value))
                     End If
                 Next
             Else
@@ -446,30 +470,114 @@ Public Class Form1
 
     Private Sub ResolveButton_Click(sender As Object, e As EventArgs) Handles resolveButton.Click
 
-        Dim modifier As Integer = 1 'damage vs healing. 1=damage, -1 = healing
+        Dim modifier As Double = 1 'damage vs healing. 1=damage, -1 = healing
         If StrComp(actionCombo.Text, "is healed", vbTextCompare) = 0 Then 'if "is healed" is chosen...
             modifier = -1 '...assign the healing modifier
         End If
-        For j = 0 To chrNameCheckedListBox1.Items.Count - 1
-            If chrNameCheckedListBox1.GetItemChecked(j) Then 'if a character is checked...
-                For k = 0 To DataGridView1.RowCount - 2 '...go through all characters...
-                    If StrComp(DataGridView1.Rows(k).Cells(1).Value, chrNameCheckedListBox1.Items(j).ToString, vbTextCompare) = 0 Then '...find the checked/chosen one...
-                        undoRow = k
-                        undoHP = DataGridView1.Rows(k).Cells(4).Value
-                        DataGridView1.Rows(k).Cells(4).Value -= modifier * NumericUpDown1.Value '...and subtract the amount in the numeric box. Hence the healing being negative.
-                        If DataGridView1.Rows(k).Cells(4).Value > DataGridView1.Rows(k).Cells(5).Value Then 'if we've healed beyond Max HP...
-                            DataGridView1.Rows(k).Cells(4).Value = DataGridView1.Rows(k).Cells(5).Value '...set to Max HP
+
+        'do stuff if healing/damage is taking place
+        If StrComp(actionCombo.Text, "is healed", vbTextCompare) = 0 Or StrComp(actionCombo.Text, "is damaged", vbTextCompare) = 0 Then
+            For j = 0 To chrNameCheckedListBox1.Items.Count - 1
+                If chrNameCheckedListBox1.GetItemChecked(j) Then 'if a character is checked...
+                    For k = 0 To DataGridView1.RowCount - 2 '...go through all characters...
+                        If StrComp(DataGridView1.Rows(k).Cells(NAMEcol).Value, chrNameCheckedListBox1.Items(j).ToString, vbTextCompare) = 0 Then '...find the checked/chosen one...
+                            undoRow = k
+                            undoHP = DataGridView1.Rows(k).Cells(HPcol).Value
+                            DataGridView1.Rows(k).Cells(HPcol).Value -= modifier * NumericUpDown1.Value '...and subtract the amount in the numeric box. Hence the healing being negative.
+                            If DataGridView1.Rows(k).Cells(HPcol).Value > DataGridView1.Rows(k).Cells(MAXHPcol).Value Then 'if we've healed beyond Max HP...
+                                DataGridView1.Rows(k).Cells(HPcol).Value = DataGridView1.Rows(k).Cells(MAXHPcol).Value '...set to Max HP
+                            End If
+                            damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(HPcol).Value & vbLf & damageHistory.Text
+                            'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
+                            '    DataGridView1.Rows(k).Cells(4).Value = 0
+                            'End If
                         End If
-                        damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(4).Value & vbLf & damageHistory.Text
-                        'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
-                        '    DataGridView1.Rows(k).Cells(4).Value = 0
-                        'End If
-                    End If
-                Next
-            End If
-        Next
-        'next
-    End Sub 'add/subtract HP based on selections
+                    Next
+                End If
+            Next
+        Else
+            'DC Saves
+            Dim ATTcol As Integer
+            Dim SaveChoice As String
+            SaveChoice = actionCombo.Text
+            Select Case SaveChoice
+                Case "STR Check"
+                    ATTcol = STRcol
+            End Select
+            Roll("d20" & ModifierResult(ATTcol))
+
+            For j = 0 To chrNameCheckedListBox1.Items.Count - 1
+                If chrNameCheckedListBox1.GetItemChecked(j) Then 'if a character is checked...
+                    For k = 0 To DataGridView1.RowCount - 2 '...go through all characters...
+                        If StrComp(DataGridView1.Rows(k).Cells(NAMEcol).Value, chrNameCheckedListBox1.Items(j).ToString, vbTextCompare) = 0 Then '...find the checked/chosen one...
+                            undoRow = k
+                            undoHP = DataGridView1.Rows(k).Cells(HPcol).Value
+                            'if pass, halve the damage
+                            If pubRollVal >= DCupdown.Value Then
+                                modifier = 0.5
+                            End If
+                            Dim HPlost As Integer = modifier * NumericUpDown1.Value 'the amount of HP lost.
+                            If resistCheckBox.Checked Then
+                                HPlost *= 0.5
+                            End If
+                            DataGridView1.Rows(k).Cells(HPcol).Value -= HPlost '...and subtract the amount of HP lost (rounding down shenanigans with D&D rules).
+                            damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & HPlost & " | " & DataGridView1.Rows(k).Cells(HPcol).Value & vbLf & damageHistory.Text
+                            'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
+                            '    DataGridView1.Rows(k).Cells(4).Value = 0
+                            'End If
+                        End If
+                    Next
+                End If
+            Next
+
+
+        End If
+
+
+
+
+    End Sub 'add/subtract HP based on selections. also performs DC Saves
+
+    Function ModifierResult(ByVal abilityScore As Double) As String
+        Select Case abilityScore
+            Case 1
+                Return "-5"
+            Case 2 To 3
+                Return "-4"
+            Case 4 To 5
+                Return "-3"
+            Case 6 To 7
+                Return "-2"
+            Case 8 To 9
+                Return "-1"
+            Case 10 To 11
+                Return "+0"
+            Case 12 To 13
+                Return "+1"
+            Case 14 To 15
+                Return "+2"
+            Case 16 To 17
+                Return "+3"
+            Case 18 To 19
+                Return "+4"
+            Case 20 To 21
+                Return "+5"
+            Case 22 To 23
+                Return "+6"
+            Case 24 To 25
+                Return "+7"
+            Case 26 To 27
+                Return "+8"
+            Case 28 To 29
+                Return "+9"
+            Case 30
+                Return "+10"
+            Case Else
+                MsgBox(abilityScore & vbCr & "Something unexpected happened.")
+                Return "+0"
+        End Select
+    End Function
+
 
     Private Sub ResistButton_Click(sender As Object, e As EventArgs) Handles resistButton.Click
         NumericUpDown1.Value = Math.Floor(NumericUpDown1.Value / 2)
@@ -560,14 +668,17 @@ Public Class Form1
         StopAudio()
     End Sub 'on click, run StopAudio Sub
 
+    'End Audio Section
+
     Private Sub UndoButton_Click(sender As Object, e As EventArgs) Handles undoButton.Click
 
-        damageHistory.Text = chrNameCheckedListBox1.Items(undoRow).ToString & " " & DataGridView1.Rows(undoRow).Cells(4).Value & " | -> | " & undoHP & vbLf & damageHistory.Text
-        DataGridView1.Rows(undoRow).Cells(4).Value = undoHP
+        damageHistory.Text = chrNameCheckedListBox1.Items(undoRow).ToString & " " & DataGridView1.Rows(undoRow).Cells(HPcol).Value & " | -> | " & undoHP & vbLf & damageHistory.Text
+        DataGridView1.Rows(undoRow).Cells(HPcol).Value = undoHP
     End Sub
 
 
-    'End Audio Section
+
+
 
 
     ' Private Sub ValueTextbox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
