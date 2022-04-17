@@ -1,0 +1,11 @@
+	#	Character Name	Initiative	Init Mod	HP	Max HP	AC	Speed	DC	STR	DEX	CON	INT	WIS	CHA	Status
+	1	Bob	13	0	12	19	10	30	12	10	10	12	12	12	10	0
+	2	Larry	10	0	18	18	10	30	12	10	10	12	12	12	11	0
+	3	Catbug	15	4	30	30	18	30	15	8	12	9	10	13	18	Adorable
+	4	Dinosaur	20	-1	50	50	20	30	10	18	8	15	8	10	15	Rawr
+	7	Infantryman 2	16	0	6	6	14	30	12	13	11	12	8	9	8	0
+	8	Infantryman 3	9	0	6	6	14	30	12	13	11	12	8	9	8	0
+	9	Infantryman 4	3	0	6	6	14	30	12	13	11	12	8	9	8	0
+	10	Archer 1	5	0	9	9	14	30	12	11	14	12	10	10	9	0
+	11	Archer 2	7	0	9	9	14	30	12	11	14	12	10	10	9	0
+	12	War Mage	3	0	22	22	14	30	15	9	13	14	16	10	10	0

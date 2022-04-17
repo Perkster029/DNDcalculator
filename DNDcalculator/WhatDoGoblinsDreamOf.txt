@@ -1,0 +1,2 @@
+#	Character Name	Initiative	Init Mod	HP	Max HP	AC	Speed	DC Save	STR	DEX	CON	INT	WIS	CHA	Status
+1	Crazy Goblin	0	0	17	17	15	30	12	8	14	10	10	8	8	Fool's Gold

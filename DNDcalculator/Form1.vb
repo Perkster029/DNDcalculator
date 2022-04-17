@@ -106,7 +106,7 @@ Public Class Form1
         Dim fd As SaveFileDialog = New SaveFileDialog With {
             .Title = "Save File Dialog",
             .InitialDirectory = ThisFilename,
-            .Filter = "Comma Separated Values (*.csv)|*.csv",
+            .Filter = "Tab Delimited Text (*.txt)|*.txt",
             .FilterIndex = 2,
             .RestoreDirectory = True
         }
@@ -121,14 +121,14 @@ Public Class Form1
         ThisGrid.SelectAll()
         IO.File.WriteAllText(Filename, ThisGrid.GetClipboardContent().GetText.TrimEnd)
         ThisGrid.ClearSelection()
-    End Sub 'saves character data to .csv file (with headers)
+    End Sub 'saves character data to .txt file (with headers)
 
     'Load
     Private Sub LoadButton_Click(sender As Object, e As EventArgs) Handles loadButton.Click
         Dim fd As OpenFileDialog = New OpenFileDialog With {
             .Title = "Open File Dialog",
             .InitialDirectory = ThisFilename,
-            .Filter = "Comma Separated Values (*.csv)|*.csv",
+            .Filter = "Tab Delimited Text (*.txt)|*.txt",
             .FilterIndex = 2,
             .RestoreDirectory = True
         }
@@ -147,13 +147,16 @@ Public Class Form1
         Dim headerLine As Boolean = True
 
         'ThisGrid.Rows.Clear()
-        For Each THisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(vbLf) 'Split(Environment.NewLine)
+        For Each ThisLine In My.Computer.FileSystem.ReadAllText(Filename).Split(vbLf) 'Split(Environment.NewLine)
             If headerLine Then
                 headerLine = False
                 Continue For
             End If
 
-            If StrComp(THisLine, "", vbTextCompare) = 0 Then
+            If StrComp(ThisLine, "", vbTextCompare) = 0 Then
+                Continue For
+            End If
+            If StrComp(ThisLine, vbCr, vbTextCompare) = 0 Then
                 Continue For
             End If
 
@@ -161,7 +164,7 @@ Public Class Form1
             For i = 0 To DataGridView1.RowCount - 2
                 tempName1 = DataGridView1.Rows(i).Cells(1).Value
                 'MsgBox(tempName1)
-                tempName2 = Strings.Left(THisLine, THisLine.IndexOf(",", THisLine.IndexOf(",") + 1))
+                tempName2 = Strings.Left(ThisLine, ThisLine.IndexOf(vbTab, ThisLine.IndexOf(vbTab) + 1))
                 'MsgBox(tempName2)
                 If Strings.Left(tempName2, 2).ToString.Trim.Length = 2 Then
                     tempName2 = Mid(tempName2, 3)
@@ -179,7 +182,7 @@ Public Class Form1
             Next i
 
             If boolFlag Then
-                ThisGrid.Rows.Add(Split(THisLine, ","))
+                ThisGrid.Rows.Add(Split(ThisLine, vbTab))
             End If
         Next
 
@@ -195,7 +198,7 @@ Public Class Form1
                 Dim fd As OpenFileDialog = New OpenFileDialog With {
                     .Title = "Open File Dialog",
                     .InitialDirectory = ThisFilename,
-                    .Filter = "Comma Separated Values (*.csv)|*.csv",
+                    .Filter = "Tab Delimited Text (*.txt)|*.txt",
                     .FilterIndex = 2,
                     .RestoreDirectory = True
                 }
