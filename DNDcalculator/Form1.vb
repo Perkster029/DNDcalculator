@@ -80,7 +80,7 @@ Public Class Form1
         If Not Directory.Exists(Application.StartupPath & "\Autosave\") Then
             Directory.CreateDirectory(Application.StartupPath & "\Autosave\")
         End If
-        SaveGridData(DataGridView1, Application.StartupPath & "\Autosave\MyDataAutosave" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".csv")
+        SaveGridData(DataGridView1, Application.StartupPath & "\Autosave\MyDataAutosave" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".txt")
     End Sub 'autosave every minute
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
         Timer1.Start()

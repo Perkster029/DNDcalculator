@@ -1,6 +1,0 @@
-#	Character Name	Initiative	Init Mod	HP	Max HP	AC	Speed	DC	STR	DEX	CON	INT	WIS	CHA	Status
-1	Bob	0	0	19	19	10	30	12	10	10	12	12	12	10	0
-2	Larry	0	0	18	18	10	30	12	10	10	12	12	12	11	0
-3	Catbug	0	4	30	30	18	30	15	8	12	9	10	13	18	Adorable
-4	Dinosaur	0	-1	50	50	20	30	10	18	8	15	8	10	15	Rawr
-5	Giant Shark	0	1	40	40	19	30	12	15	10	14	10	10	14	Grumpy
