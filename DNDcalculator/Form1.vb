@@ -61,7 +61,9 @@ Public Class Form1
             inTownFiles(i) = inTownFiles(i).Substring(inTownFiles(i).IndexOf(inTownPath) + Len(inTownPath))
         Next
         For Each file As String In inTownFiles
-            inTownAudio.Items.Add(file)
+            If StrComp(file.Substring(file.IndexOf(".") + 1), "mp3", vbTextCompare) = 0 Then
+                inTownAudio.Items.Add(file)
+            End If
         Next
 
         'Load all files in the "On_Road" folder @ onRoadPath, add them to the second tab
@@ -70,7 +72,9 @@ Public Class Form1
             onRoadFiles(i) = onRoadFiles(i).Substring(onRoadFiles(i).IndexOf(onRoadPath) + Len(onRoadPath))
         Next
         For Each file As String In onRoadFiles
-            onRoadAudio.Items.Add(file)
+            If StrComp(file.Substring(file.IndexOf(".") + 1), "mp3", vbTextCompare) = 0 Then
+                onRoadAudio.Items.Add(file)
+            End If
         Next
 
         'Load all files in the "Dungeon" folder @ dungeonPath, add them to the third tab
@@ -79,7 +83,9 @@ Public Class Form1
             dungeonFiles(i) = dungeonFiles(i).Substring(dungeonFiles(i).IndexOf(dungeonPath) + Len(dungeonPath))
         Next
         For Each file As String In dungeonFiles
-            dungeonAudio.Items.Add(file)
+            If StrComp(file.Substring(file.IndexOf(".") + 1), "mp3", vbTextCompare) = 0 Then
+                dungeonAudio.Items.Add(file)
+            End If
         Next
 
         undoHP = 0 'initialize
@@ -671,9 +677,12 @@ Public Class Form1
     'End Audio Section
 
     Private Sub UndoButton_Click(sender As Object, e As EventArgs) Handles undoButton.Click
-
-        damageHistory.Text = chrNameCheckedListBox1.Items(undoRow).ToString & " " & DataGridView1.Rows(undoRow).Cells(HPcol).Value & " | -> | " & undoHP & vbLf & damageHistory.Text
-        DataGridView1.Rows(undoRow).Cells(HPcol).Value = undoHP
+        Try
+            damageHistory.Text = chrNameCheckedListBox1.Items(undoRow).ToString & " " & DataGridView1.Rows(undoRow).Cells(HPcol).Value & " | -> | " & undoHP & vbLf & damageHistory.Text
+            DataGridView1.Rows(undoRow).Cells(HPcol).Value = undoHP
+        Catch argEx As ArgumentOutOfRangeException
+            MsgBox("Error! Can't undo.")
+        End Try
     End Sub
 
 
