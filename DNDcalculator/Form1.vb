@@ -90,7 +90,7 @@ Public Class Form1
     'Begin Timer Section 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         Dim elapsed As TimeSpan = Me.stopwatch.Elapsed
-        timeLabel.Text = String.Format("{0:00}:{1:00}", elapsed.Seconds, Strings.Left(elapsed.Milliseconds.ToString, 1))
+        timeLabel.Text = elapsed.Minutes & ":" & String.Format("{0:00}.{1:00}", elapsed.Seconds, Strings.Left(elapsed.Milliseconds.ToString, 1))
     End Sub 'manual timer tick
     Private Sub Timer2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer2.Tick
         If Not Directory.Exists(Application.StartupPath & "\Autosave\") Then
@@ -110,7 +110,7 @@ Public Class Form1
     End Sub 'pauses manual stopwatch
     Private Sub ResetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
         Me.stopwatch.Reset()
-        timeLabel.Text = "00:0"
+        timeLabel.Text = "0:00.0"
         startButton.Enabled = True
     End Sub 'resets manual stopwatch
     'End Timer Section
@@ -209,6 +209,22 @@ Public Class Form1
         Next
 
         DataGridView1.RowHeadersVisible = True
+
+        For i = 0 To DataGridView1.RowCount - 1
+            'strip out the leading/tailing quotes from name and status, if they both exist
+            If StrComp(Strings.Left(DataGridView1.Rows(i).Cells(STATUScol).Value, 1), Chr(34), CompareMethod.Text) = 0 And StrComp(Strings.Right(DataGridView1.Rows(i).Cells(STATUScol).Value, 1), Chr(34), CompareMethod.Text) Then
+                DataGridView1.Rows(i).Cells(STATUScol).Value = Strings.Mid(DataGridView1.Rows(i).Cells(STATUScol).Value, 2, Strings.Len(DataGridView1.Rows(i).Cells(STATUScol).Value) - 2)
+            End If
+
+            If StrComp(Strings.Left(DataGridView1.Rows(i).Cells(NAMEcol).Value, 1), Chr(34), CompareMethod.Text) = 0 And StrComp(Strings.Right(DataGridView1.Rows(i).Cells(STATUScol).Value, 1), Chr(34), CompareMethod.Text) Then
+                DataGridView1.Rows(i).Cells(STATUScol).Value = Strings.Mid(DataGridView1.Rows(i).Cells(STATUScol).Value, 2, Strings.Len(DataGridView1.Rows(i).Cells(STATUScol).Value) - 2)
+            End If
+
+            If StrComp(DataGridView1.Rows(i).Cells(HPcol).Value, "", CompareMethod.Text) = 0 Then
+                DataGridView1.Rows(i).Cells(HPcol).Value = DataGridView1.Rows(i).Cells(MAXHPcol).Value
+            End If
+
+        Next
 
     End Sub
     Private Sub ClearLoadGridData(ByRef ThisGrid As DataGridView, ByVal Filename As String)
@@ -482,16 +498,21 @@ Public Class Form1
                     For k = 0 To DataGridView1.RowCount - 2 '...go through all characters...
                         If StrComp(DataGridView1.Rows(k).Cells(NAMEcol).Value, chrNameCheckedListBox1.Items(j).ToString, vbTextCompare) = 0 Then '...find the checked/chosen one...
                             undoRow = k
-                            undoHP = DataGridView1.Rows(k).Cells(HPcol).Value
-                            DataGridView1.Rows(k).Cells(HPcol).Value -= modifier * NumericUpDown1.Value '...and subtract the amount in the numeric box. Hence the healing being negative.
-                            If DataGridView1.Rows(k).Cells(HPcol).Value > DataGridView1.Rows(k).Cells(MAXHPcol).Value Then 'if we've healed beyond Max HP...
-                                DataGridView1.Rows(k).Cells(HPcol).Value = DataGridView1.Rows(k).Cells(MAXHPcol).Value '...set to Max HP
+                            If Not StrComp(DataGridView1.Rows(k).Cells(HPcol).Value, "", CompareMethod.Text) = 0 Then
+                                undoHP = DataGridView1.Rows(k).Cells(HPcol).Value
+                            Else
+                                DataGridView1.Rows(k).Cells(HPcol).Value = 0
+                                undoHP = 0
                             End If
-                            damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(HPcol).Value & vbLf & damageHistory.Text
-                            'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
-                            '    DataGridView1.Rows(k).Cells(4).Value = 0
-                            'End If
-                        End If
+                            DataGridView1.Rows(k).Cells(HPcol).Value -= modifier * NumericUpDown1.Value '...and subtract the amount in the numeric box. Hence the healing being negative.
+                                If DataGridView1.Rows(k).Cells(HPcol).Value > DataGridView1.Rows(k).Cells(MAXHPcol).Value Then 'if we've healed beyond Max HP...
+                                    DataGridView1.Rows(k).Cells(HPcol).Value = DataGridView1.Rows(k).Cells(MAXHPcol).Value '...set to Max HP
+                                End If
+                                damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(HPcol).Value & vbLf & damageHistory.Text
+                                'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
+                                '    DataGridView1.Rows(k).Cells(4).Value = 0
+                                'End If
+                            End If
                     Next
                 End If
             Next
@@ -503,7 +524,18 @@ Public Class Form1
             Select Case SaveChoice
                 Case "STR Check"
                     ATTcol = STRcol
+                Case "DEX Check"
+                    ATTcol = DEXcol
+                Case "CON Check"
+                    ATTcol = CONcol
+                Case "INT Check"
+                    ATTcol = INTcol
+                Case "WIS Check"
+                    ATTcol = WIScol
+                Case "CHA Check"
+                    ATTcol = CHAcol
             End Select
+
             Roll("d20" & ModifierResult(ATTcol))
 
             For j = 0 To chrNameCheckedListBox1.Items.Count - 1

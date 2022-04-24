@@ -372,12 +372,13 @@ Partial Class Form1
         'timeLabel
         '
         Me.timeLabel.AutoSize = True
-        Me.timeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timeLabel.Location = New System.Drawing.Point(16, 11)
+        Me.timeLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.timeLabel.Location = New System.Drawing.Point(21, 24)
         Me.timeLabel.Name = "timeLabel"
-        Me.timeLabel.Size = New System.Drawing.Size(158, 73)
+        Me.timeLabel.Size = New System.Drawing.Size(158, 55)
         Me.timeLabel.TabIndex = 20
-        Me.timeLabel.Text = "00:0"
+        Me.timeLabel.Text = "0:00.0"
+        Me.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'startButton
         '
