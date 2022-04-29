@@ -511,14 +511,14 @@ Public Class Form1
                                 undoHP = 0
                             End If
                             DataGridView1.Rows(k).Cells(HPcol).Value -= modifier * NumericUpDown1.Value '...and subtract the amount in the numeric box. Hence the healing being negative.
-                                If DataGridView1.Rows(k).Cells(HPcol).Value > DataGridView1.Rows(k).Cells(MAXHPcol).Value Then 'if we've healed beyond Max HP...
-                                    DataGridView1.Rows(k).Cells(HPcol).Value = DataGridView1.Rows(k).Cells(MAXHPcol).Value '...set to Max HP
-                                End If
-                                damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(HPcol).Value & vbLf & damageHistory.Text
-                                'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
-                                '    DataGridView1.Rows(k).Cells(4).Value = 0
-                                'End If
+                            If DataGridView1.Rows(k).Cells(HPcol).Value > DataGridView1.Rows(k).Cells(MAXHPcol).Value Then 'if we've healed beyond Max HP...
+                                DataGridView1.Rows(k).Cells(HPcol).Value = DataGridView1.Rows(k).Cells(MAXHPcol).Value '...set to Max HP
                             End If
+                            damageHistory.Text = chrNameCheckedListBox1.Items(j).ToString & " " & undoHP & " | -" & (-1 * modifier * NumericUpDown1.Value) & " | " & DataGridView1.Rows(k).Cells(HPcol).Value & vbLf & damageHistory.Text
+                            'If DataGridView1.Rows(k).Cells(4).Value < 0 Then
+                            '    DataGridView1.Rows(k).Cells(4).Value = 0
+                            'End If
+                        End If
                     Next
                 End If
             Next
