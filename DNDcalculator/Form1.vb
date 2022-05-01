@@ -152,7 +152,7 @@ Public Class Form1
         DataGridView1.RowHeadersVisible = False
         Dim fd As OpenFileDialog = New OpenFileDialog With {
             .Title = "Open File Dialog",
-            .InitialDirectory = ThisFilename,
+            .InitialDirectory = ThisFilename & "\MonsterLibrary\",
             .Filter = "Tab Delimited Text (*.txt)|*.txt",
             .FilterIndex = 2,
             .RestoreDirectory = True
@@ -243,7 +243,7 @@ Public Class Form1
             Case MsgBoxResult.Yes
                 Dim fd As OpenFileDialog = New OpenFileDialog With {
                     .Title = "Open File Dialog",
-                    .InitialDirectory = ThisFilename,
+                    .InitialDirectory = ThisFilename & "\MonsterLibrary\",
                     .Filter = "Tab Delimited Text (*.txt)|*.txt",
                     .FilterIndex = 2,
                     .RestoreDirectory = True
@@ -466,6 +466,7 @@ Public Class Form1
         Try
             Roll(rollText.Text)
         Catch
+            MsgBox("Invalid entry for roll. Check input.")
         End Try
     End Sub 'on click, runs Roll Sub
 
@@ -716,9 +717,6 @@ Public Class Form1
             MsgBox("Error! Can't undo.")
         End Try
     End Sub
-
-
-
 
 
 

@@ -1,8 +1,0 @@
-#	Character	Name	Initiative	Init	Mod	HP	Max	HP	AC	Speed	DC	Save	STR	DEX	CON	INT	WIS	CHA	Status
-1	Infantryman	1	0	0	6	6	14	30	12	13	11	12	8	9	8	0
-2	Infantryman	2	0	0	6	6	14	30	12	13	11	12	8	9	8	0
-3	Infantryman	3	0	0	6	6	14	30	12	13	11	12	8	9	8	0
-4	Infantryman	4	0	0	6	6	14	30	12	13	11	12	8	9	8	0
-5	Archer	1	0	0	9	9	14	30	12	11	14	12	10	10	9	0
-6	Archer	2	0	0	9	9	14	30	12	11	14	12	10	10	9	0
-7	War	Mage	0	0	22	22	14	30	15	9	13	14	16	10	10	0

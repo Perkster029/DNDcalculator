@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
@@ -82,6 +82,7 @@ Partial Class Form1
         Me.DCupdown = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.resistCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Tooltip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -213,6 +214,7 @@ Partial Class Form1
         Me.saveButton.Size = New System.Drawing.Size(75, 23)
         Me.saveButton.TabIndex = 2
         Me.saveButton.Text = "Save"
+        Me.Tooltip1.SetToolTip(Me.saveButton, "Saves current character list as .txt file.")
         Me.saveButton.UseVisualStyleBackColor = True
         '
         'loadButton
@@ -222,13 +224,15 @@ Partial Class Form1
         Me.loadButton.Size = New System.Drawing.Size(75, 23)
         Me.loadButton.TabIndex = 3
         Me.loadButton.Text = "Load"
+        Me.Tooltip1.SetToolTip(Me.loadButton, "Adds character(s) from selected .txt file to current list of characters." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duplica" &
+        "te entries are allowed.")
         Me.loadButton.UseVisualStyleBackColor = True
         '
         'chrNameCheckedListBox1
         '
         Me.chrNameCheckedListBox1.CheckOnClick = True
         Me.chrNameCheckedListBox1.FormattingEnabled = True
-        Me.chrNameCheckedListBox1.Location = New System.Drawing.Point(195, 32)
+        Me.chrNameCheckedListBox1.Location = New System.Drawing.Point(183, 32)
         Me.chrNameCheckedListBox1.Name = "chrNameCheckedListBox1"
         Me.chrNameCheckedListBox1.Size = New System.Drawing.Size(143, 184)
         Me.chrNameCheckedListBox1.TabIndex = 5
@@ -236,15 +240,16 @@ Partial Class Form1
         'actionCombo
         '
         Me.actionCombo.FormattingEnabled = True
-        Me.actionCombo.Location = New System.Drawing.Point(344, 32)
+        Me.actionCombo.Location = New System.Drawing.Point(335, 32)
         Me.actionCombo.Name = "actionCombo"
         Me.actionCombo.Size = New System.Drawing.Size(93, 21)
         Me.actionCombo.TabIndex = 4
+        Me.Tooltip1.SetToolTip(Me.actionCombo, "Select whether the action will damage, heal, or require a saving throw.")
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(441, 35)
+        Me.Label1.Location = New System.Drawing.Point(437, 35)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(19, 13)
         Me.Label1.TabIndex = 7
@@ -256,6 +261,9 @@ Partial Class Form1
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(75, 20)
         Me.NumericUpDown1.TabIndex = 8
+        Me.Tooltip1.SetToolTip(Me.NumericUpDown1, "The amount of base damage or healing that would" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "occur (ignoring resistance or sa" &
+        "ves)." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Can be populated from the ""Import"" button below." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Can be halved from the " &
+        """Resist"" button below.")
         '
         'clearLoadButton
         '
@@ -264,6 +272,7 @@ Partial Class Form1
         Me.clearLoadButton.Size = New System.Drawing.Size(75, 23)
         Me.clearLoadButton.TabIndex = 9
         Me.clearLoadButton.Text = "Clear/Load"
+        Me.Tooltip1.SetToolTip(Me.clearLoadButton, "Clears existing character data and loads character(s) from .txt file chosen.")
         Me.clearLoadButton.UseVisualStyleBackColor = True
         '
         'clearInit
@@ -273,6 +282,7 @@ Partial Class Form1
         Me.clearInit.Size = New System.Drawing.Size(48, 23)
         Me.clearInit.TabIndex = 10
         Me.clearInit.Text = "Clear"
+        Me.Tooltip1.SetToolTip(Me.clearInit, "Clears text shown below.")
         Me.clearInit.UseVisualStyleBackColor = True
         '
         'sortInit
@@ -282,6 +292,7 @@ Partial Class Form1
         Me.sortInit.Size = New System.Drawing.Size(50, 23)
         Me.sortInit.TabIndex = 11
         Me.sortInit.Text = "Sort"
+        Me.Tooltip1.SetToolTip(Me.sortInit, "Sorts ALL characters below from highest to lowest initiative.")
         Me.sortInit.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -319,15 +330,19 @@ Partial Class Form1
         Me.rollButton.Size = New System.Drawing.Size(75, 23)
         Me.rollButton.TabIndex = 14
         Me.rollButton.Text = "Roll"
+        Me.Tooltip1.SetToolTip(Me.rollButton, "Rolls any quantity of any sided die (only 1 type per roll)." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Modifiers are allowe" &
+        "d (+1, -3, etc.)." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Examples: d5+4, 2d10-1, 2d20")
         Me.rollButton.UseVisualStyleBackColor = True
         '
         'crInitButton
         '
-        Me.crInitButton.Location = New System.Drawing.Point(195, 222)
+        Me.crInitButton.Location = New System.Drawing.Point(183, 222)
         Me.crInitButton.Name = "crInitButton"
         Me.crInitButton.Size = New System.Drawing.Size(84, 23)
         Me.crInitButton.TabIndex = 16
         Me.crInitButton.Text = "C/R Initiative"
+        Me.Tooltip1.SetToolTip(Me.crInitButton, "For all selected (checked) characters, clears value for initiative and rolls for " &
+        "new initiative (applying Init Mod).")
         Me.crInitButton.UseVisualStyleBackColor = True
         '
         'importButton
@@ -337,24 +352,27 @@ Partial Class Form1
         Me.importButton.Size = New System.Drawing.Size(48, 23)
         Me.importButton.TabIndex = 17
         Me.importButton.Text = "Import"
+        Me.Tooltip1.SetToolTip(Me.importButton, "On click, populates the damage box with the last rolled value.")
         Me.importButton.UseVisualStyleBackColor = True
         '
         'selAllButton
         '
-        Me.selAllButton.Location = New System.Drawing.Point(204, 6)
+        Me.selAllButton.Location = New System.Drawing.Point(192, 6)
         Me.selAllButton.Name = "selAllButton"
         Me.selAllButton.Size = New System.Drawing.Size(50, 20)
         Me.selAllButton.TabIndex = 13
         Me.selAllButton.Text = "Sel All"
+        Me.Tooltip1.SetToolTip(Me.selAllButton, "Checks all characters listed below.")
         Me.selAllButton.UseVisualStyleBackColor = True
         '
         'desAllButton
         '
-        Me.desAllButton.Location = New System.Drawing.Point(278, 6)
+        Me.desAllButton.Location = New System.Drawing.Point(266, 6)
         Me.desAllButton.Name = "desAllButton"
         Me.desAllButton.Size = New System.Drawing.Size(50, 20)
         Me.desAllButton.TabIndex = 18
         Me.desAllButton.Text = "Des All"
+        Me.Tooltip1.SetToolTip(Me.desAllButton, "Unchecks all characters listed below.")
         Me.desAllButton.UseVisualStyleBackColor = True
         '
         'resolveButton
@@ -364,6 +382,7 @@ Partial Class Form1
         Me.resolveButton.Size = New System.Drawing.Size(75, 23)
         Me.resolveButton.TabIndex = 19
         Me.resolveButton.Text = "Resolve"
+        Me.Tooltip1.SetToolTip(Me.resolveButton, resources.GetString("resolveButton.ToolTip"))
         Me.resolveButton.UseVisualStyleBackColor = True
         '
         'Timer1
@@ -418,6 +437,7 @@ Partial Class Form1
         Me.resistButton.Size = New System.Drawing.Size(48, 23)
         Me.resistButton.TabIndex = 24
         Me.resistButton.Text = "Resist"
+        Me.Tooltip1.SetToolTip(Me.resistButton, "On click, halves the value in the damage field above.")
         Me.resistButton.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -426,7 +446,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.stopButton)
         Me.GroupBox2.Controls.Add(Me.startButton)
         Me.GroupBox2.Controls.Add(Me.timeLabel)
-        Me.GroupBox2.Location = New System.Drawing.Point(345, 129)
+        Me.GroupBox2.Location = New System.Drawing.Point(339, 129)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(193, 116)
         Me.GroupBox2.TabIndex = 25
@@ -533,6 +553,7 @@ Partial Class Form1
         Me.stopAudioButton.Size = New System.Drawing.Size(75, 23)
         Me.stopAudioButton.TabIndex = 31
         Me.stopAudioButton.Text = "Silence!"
+        Me.Tooltip1.SetToolTip(Me.stopAudioButton, "Stops any music currently playing.")
         Me.stopAudioButton.UseVisualStyleBackColor = True
         '
         'undoButton
@@ -542,15 +563,16 @@ Partial Class Form1
         Me.undoButton.Size = New System.Drawing.Size(75, 23)
         Me.undoButton.TabIndex = 32
         Me.undoButton.Text = "Undo"
+        Me.Tooltip1.SetToolTip(Me.undoButton, "Reverts the last change made.")
         Me.undoButton.UseVisualStyleBackColor = True
         '
         'damageHistory
         '
-        Me.damageHistory.Location = New System.Drawing.Point(344, 61)
+        Me.damageHistory.Location = New System.Drawing.Point(335, 61)
         Me.damageHistory.Name = "damageHistory"
         Me.damageHistory.ReadOnly = True
         Me.damageHistory.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
-        Me.damageHistory.Size = New System.Drawing.Size(139, 49)
+        Me.damageHistory.Size = New System.Drawing.Size(148, 49)
         Me.damageHistory.TabIndex = 33
         Me.damageHistory.Text = ""
         '
@@ -560,11 +582,12 @@ Partial Class Form1
         Me.DCupdown.Name = "DCupdown"
         Me.DCupdown.Size = New System.Drawing.Size(75, 20)
         Me.DCupdown.TabIndex = 34
+        Me.Tooltip1.SetToolTip(Me.DCupdown, "Required saving throw value.")
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(439, 11)
+        Me.Label2.Location = New System.Drawing.Point(435, 11)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(22, 13)
         Me.Label2.TabIndex = 35
@@ -578,7 +601,16 @@ Partial Class Form1
         Me.resistCheckBox.Size = New System.Drawing.Size(55, 17)
         Me.resistCheckBox.TabIndex = 36
         Me.resistCheckBox.Text = "Resist"
+        Me.Tooltip1.SetToolTip(Me.resistCheckBox, "Halves damage on ""Resolve"" if checked." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Stacks with pass/fail: if DC check is pas" &
+        "sed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and Resist is checked, 0.25 damage is taken." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         Me.resistCheckBox.UseVisualStyleBackColor = True
+        '
+        'Tooltip1
+        '
+        Me.Tooltip1.AutomaticDelay = 1000
+        Me.Tooltip1.AutoPopDelay = 5000
+        Me.Tooltip1.InitialDelay = 1000
+        Me.Tooltip1.ReshowDelay = 200
         '
         'Form1
         '
@@ -611,7 +643,7 @@ Partial Class Form1
         Me.Controls.Add(Me.DataGridView1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "GM Tool for D&D"
+        Me.Text = "DM Tool"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
@@ -688,4 +720,5 @@ Partial Class Form1
     Friend WithEvents DCupdown As NumericUpDown
     Friend WithEvents Label2 As Label
     Friend WithEvents resistCheckBox As CheckBox
+    Friend WithEvents Tooltip1 As ToolTip
 End Class
